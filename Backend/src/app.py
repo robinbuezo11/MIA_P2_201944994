@@ -19,9 +19,13 @@ def command():
     data = request.get_json()
     print(data["command"])
     
-    parser = get_parser()
-    parse_result = parser.parse(data["command"])
-    return jsonify(parse_result)
+    #parser = get_parser()
+    #parse_result = parser.parse(data["command"])
+    return jsonify({
+        "status": "success",
+        "result": data["command"],
+        "error": ""
+    })
 
 
 if __name__ == "__main__":

@@ -1,6 +1,0 @@
-mkdisk -size=5 -unit=M -path="/home/robin/Documentos/Archivos/Proyectos/Proyecto1/MIA_P1_201944994/Archivos/Disco1.dsk"
-fdisk -path="/home/robin/Documentos/Archivos/Proyectos/Proyecto1/MIA_P1_201944994/Archivos/Disco1.dsk" -unit=M -name=Particion1 -size=1
-fdisk -path="/home/robin/Documentos/Archivos/Proyectos/Proyecto1/MIA_P1_201944994/Archivos/Disco1.dsk" -unit=M -name=Particion2 -size=1
-fdisk -path="/home/robin/Documentos/Archivos/Proyectos/Proyecto1/MIA_P1_201944994/Archivos/Disco1.dsk" -unit=M -name=Particion3 -size=1
-fdisk -path="/home/robin/Documentos/Archivos/Proyectos/Proyecto1/MIA_P1_201944994/Archivos/Disco1.dsk" -unit=M -size=1 -name=Particion4
-rep -path=/home/robin/Documentos/Archivos/Proyectos/Proyecto1/MIA_P1_201944994/Archivos/Disco1.dsk
