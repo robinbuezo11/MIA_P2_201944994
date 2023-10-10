@@ -14,10 +14,17 @@ from Commands.Mkfs import *
 # Grammar rules
 def p_init(t):
     'init : list_commands'
+    t[0] = t[1]
+    return t[0]
 
 def p_list_commands(t):
     '''list_commands : list_commands commands
                     | commands'''
+    if len(t) != 2:
+        t[1] += t[2]
+        t[0] = t[1]
+    else:
+        t[0] = t[1]
     
 def p_commands(t): 
     '''commands : command_execute
@@ -31,6 +38,7 @@ def p_commands(t):
                 | command_pause
                 | command_rep
                 | COMMENT'''
+    t[0] = t[1]
 
 #------------------------------------------------------------
 #------------------------ EXECUTE ---------------------------
@@ -57,8 +65,8 @@ def p_command_mkdisk(t):
     
     for param in required_params:
         if param not in t[2]:
-            printError(f'MKDISK -> Parametro {param} requerido')
-            return
+            t[0] = f'MKDISK -> Parametro {param} requerido\n'
+            return t[0]
         
     path = t[2].get('path')
     size = t[2].get('size')
@@ -66,28 +74,25 @@ def p_command_mkdisk(t):
     fit = t[2].get('fit', 'ff')
 
     if path[-3:] != 'dsk':
-        printError(f'MKDISK -> La extension del archivo {path} debe ser .dsk')
-        return
+        t[0] += f'MKDISK -> La extension del archivo {path} debe ser .dsk\n'
+        return t[0]
 
     if unit not in ['m', 'k']:
         try:
-            printError(f'MKDISK -> Unidad {str(unit).upper()} no reconocida')
+            return t[0] + f'MKDISK -> Unidad {str(unit).upper()} no reconocida\n'
         except:
-            printError(f'MKDISK -> Unidad {unit} no reconocida')
-        return
+            return t[0] + f'MKDISK -> Unidad {unit} no reconocida\n'
     
     if size < 0:
-        printError(f'MKDISK -> Tamaño {size} no valido')
-        return
+        return t[0] + f'MKDISK -> Tamaño {size} no valido\n'
     
     if fit not in ['bf', 'ff', 'wf']:
         try:
-            printError(f'MKDISK -> Ajuste {str(fit).upper()} no reconocido')
+            return t[0] + f'MKDISK -> Ajuste {str(fit).upper()} no reconocido\n'
         except:
-            printError(f'MKDISK -> Ajuste {fit} no reconocido')
-        return
+            return t[0] + f'MKDISK -> Ajuste {fit} no reconocido\n'
     
-    mkdisk(path, size, unit, fit)
+    t[0] += mkdisk(path, size, unit, fit)
 
 def p_params_mkdisk(t):
     '''params_mkdisk : params_mkdisk param_mkdisk

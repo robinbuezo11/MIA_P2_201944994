@@ -90,18 +90,19 @@ class MBR(ctypes.Structure):
         self._set_dsk_fit(dsk_fit)
     
     def display_info(self):
-        print("\n*** MBR ***")
-        print(f"Tamaño: {self.mbr_tamano/1024} KB")
-        print("Fecha de creacion: ", self.mbr_fecha_creacion.decode())
-        print("Identificador: ", self.mbr_dsk_signature)
-        print("Ajuste: ", self.dsk_fit.decode().upper())
-        print("\n* PARTICIONES *")
+        result = "\n*** MBR ***\n"
+        result += f"Tamaño: {self.mbr_tamano/1024} KB\n"
+        result += f"Fecha de creacion: {self.mbr_fecha_creacion.decode()}\n"
+        result += f"Identificador: {self.mbr_dsk_signature}\n"
+        result += f"Ajuste: {self.dsk_fit.decode().upper()}\n"
+        result += "\n* PARTICIONES *\n"
         for i in range(4):
-            print(f'Particion {i+1}:')
+            result += f"Particion {i+1}:\n"
             if self.partitions[i].part_type == b'\0':
-                print("No hay particion\n")
+                result += "No hay particion\n"
             else:
-                self.partitions[i].display_info()
+                result += self.partitions[i].display_info()
+        return result
 
     def doSerialize(self):
         serialize = struct.pack(

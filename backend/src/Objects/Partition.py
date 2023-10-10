@@ -58,12 +58,13 @@ class Partition(ctypes.Structure):
         self._set_part_name(part_name)
     
     def display_info(self):
-        print("Estado: ", self.part_status.decode().upper())
-        print("Tipo: ", self.part_type.decode().upper())
-        print("Ajuste: ", self.part_fit.decode().upper())
-        print("Inicio: ", self.part_start)
-        print(f"Tamaño: {self.part_s/1024} KB")
-        print("Nombre: ", self.part_name.decode().upper(), "\n")
+        result = "Estado: " + self.part_status.decode().upper() + "\n"
+        result += "Tipo: " + self.part_type.decode().upper() + "\n"
+        result += "Ajuste: " + self.part_fit.decode().upper() + "\n"
+        result += "Inicio: " + str(self.part_start) + "\n"
+        result += f"Tamaño: {self.part_s/1024} KB\n"
+        result += "Nombre: " + self.part_name.decode().upper() + "\n"
+        return result
 
     def doSerialize(self):
         return struct.pack(

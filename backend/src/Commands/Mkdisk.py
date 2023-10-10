@@ -6,8 +6,8 @@ from Utils.Fmanager import *
 from Utils.Utilities import *
 
 def mkdisk(path, size, unit, fit):
-    printConsole('Ejecutando el comando MKDISK')
-    print("***** Creando MBR *****")
+    result = 'Ejecutando el comando MKDISK\n'
+    result += '***** Creando MBR *****\n'
 
     size_bytes = get_sizeB(size, unit)
 
@@ -15,7 +15,7 @@ def mkdisk(path, size, unit, fit):
 
     mbr = MBR()
     mbr.set_info(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), size_bytes, fit)
-    mbr.display_info()
+    result += mbr.display_info()
 
     print("\n***** Creando Disco *****")
     directory, file_name = os.path.split(path)
@@ -24,42 +24,43 @@ def mkdisk(path, size, unit, fit):
             os.makedirs(directory)
 
     if Fcreate_file(path):
-        printSuccess(f'Se creo el disco {file_name} en {directory}')
+        result += f'Se creo el disco {file_name} en {directory}\n'
     else:
         printError(f'No se pudo crear el disco {file_name} en {directory}')
-        return False
+        result += f'No se pudo crear el disco {file_name} en {directory}\n'
+        return result
 
     try:
         file = open(path, "rb+")
     except Exception as e:
-        printError(f"{e}")
-        return False
+        result += f"{e}\n"
+        return result
 
-    print("\n***** Aplicando Tamaño *****")
+    result += "\n***** Aplicando Tamaño *****\n"
     mb = get_sizeM(size_bytes, 'b')
     if Winit_size(file, mb):
-        printSuccess(f'Se aplico el tamaño {mb}MB al disco {file_name}')
+        result += f'Se aplico el tamaño {mb}MB al disco {file_name}\n'
     else:
-        printError(f'No se pudo aplicar el tamaño al disco {file_name}')
+        result += f'No se pudo aplicar el tamaño al disco {file_name}\n'
         file.close()
-        return False
+        return result
     
     if struct.calcsize(mbr.get_const()) > size_bytes:
-        printError(f'El tamaño del disco es muy pequeño para el MBR')
+        result += f'El tamaño del disco es muy pequeño para el MBR\n'
         file.close()
-        return False
+        return result
 
-    print("\n***** Escribiendo MBR *****")
+    result += "\n***** Escribiendo MBR *****\n"
     if Fwrite_displacement(file, 0, mbr):
-        printSuccess("Se escribio el MBR correctamente")
+        result += "Se escribio el MBR correctamente\n"
     else:
-        printError("No se pudo escribir el MBR")
+        result += "No se pudo escribir el MBR\n"
     
     try:
         file.close()
     except Exception as e:
-        printError(f"{e}")
-        return False
+        result += f"{e}\n"
+        return result
     
-    printConsole("Finalizando MKDISK\n")
-    return True
+    result += "\nFinalizando MKDISK\n"
+    return result
