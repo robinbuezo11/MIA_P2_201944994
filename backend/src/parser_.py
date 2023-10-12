@@ -62,7 +62,8 @@ def p_command_mkdisk(t):
     'command_mkdisk : MKDISK params_mkdisk'
 
     required_params = ['path', 'size']
-    
+
+    t[0] = ''    
     for param in required_params:
         if param not in t[2]:
             t[0] = f'MKDISK -> Parametro {param} requerido\n'
@@ -117,46 +118,48 @@ def p_command_rmdisk(t):
     '''command_rmdisk : RMDISK GUION PATH IGUAL CADENA
                       | RMDISK GUION PATH IGUAL CADENA_SC'''
     
+    t[0] = ''
     if t[5][-3:] != 'dsk':
-        printError(f'RMDISK -> La extension del archivo {t[5]} debe ser .dsk')
+        t[0] += f'RMDISK -> La extension del archivo {t[5]} debe ser .dsk\n'
         return
 
-    rmdisk(t[5])
+    t[0] += rmdisk(t[5])
 
 #------------------------------------------------------------
 #------------------------ FDISK -----------------------------
 def p_command_fdisk(t):
     'command_fdisk : FDISK params_fdisk'
     
+    t[0] = ''
     required_params = ['path', 'name']
 
     # Check if exists more than one operation
-    op_params = ['delete', 'add']
-    op_count = 0
-    for param in op_params:
-        if param in t[2]:
-            op_count += 1
-    if op_count > 1:
-        printError(f'FDISK -> No se puede usar mas de un parametro entre {op_params}')
-        return
+    # op_params = ['delete', 'add']
+    # op_count = 0
+    # for param in op_params:
+    #     if param in t[2]:
+    #         op_count += 1
+    # if op_count > 1:
+    #     t[0] += f'FDISK -> No se puede usar mas de un parametro entre {op_params}\n'
+    #     return
     
     # Search the first operation if exists
-    op = None
-    for param in t[2]:
-        if param == 'delete':
-            op = 'delete'
-            break
-        elif param == 'add':
-            op = 'add'
-            break
+    # op = None
+    # for param in t[2]:
+    #     if param == 'delete':
+    #         op = 'delete'
+    #         break
+    #     elif param == 'add':
+    #         op = 'add'
+    #         break
 
     # if not exists operation, add size how required param
-    if not op:
-        required_params.append('size')
+    # if not op:
+    required_params.append('size')
 
     for param in required_params:
         if param not in t[2]:
-            printError(f'FDISK -> Parametro {param} requerido')
+            t[0] += f'FDISK -> Parametro {param} requerido\n'
             return
         
     path = t[2].get('path')
@@ -165,52 +168,52 @@ def p_command_fdisk(t):
     name = t[2].get('name')
     type = t[2].get('type', 'p')
     fit = t[2].get('fit', 'wf')
-    delete = t[2].get('delete', 'full')
-    add = t[2].get('add', 0)
+    # delete = t[2].get('delete', 'full')
+    # add = t[2].get('add', 0)
 
     if unit not in ['b', 'k', 'm']:
         try:
-            printError(f'FDISK -> Unidad {str(unit).upper()} no reconocida')
+            t[0] += f'FDISK -> Unidad {str(unit).upper()} no reconocida\n'
         except:
-            printError(f'FDISK -> Unidad {unit} no reconocida')
+            t[0] += f'FDISK -> Unidad {unit} no reconocida\n'
         return
     
     if size < 0:
-        printError(f'FDISK -> Tamaño {size} no valido')
+        t[0] += f'FDISK -> Tamaño {size} no valido\n'
         return
     
     if type not in ['p', 'e', 'l']:
         try:
-            printError(f'FDISK -> Tipo {str(type).upper()} no reconocido')
+            t[0] += f'FDISK -> Tipo {str(type).upper()} no reconocido\n'
         except:
-            printError(f'FDISK -> Tipo {type} no reconocido')
+            t[0] += f'FDISK -> Tipo {type} no reconocido\n'
         return
     
     if fit not in ['bf', 'ff', 'wf']:
         try:
-            printError(f'FDISK -> Ajuste {str(fit).upper()} no reconocido')
+            t[0] += f'FDISK -> Ajuste {str(fit).upper()} no reconocido\n'
         except:
-            printError(f'FDISK -> Ajuste {fit} no reconocido')
+            t[0] += f'FDISK -> Ajuste {fit} no reconocido\n'
         return
     
-    if delete != 'full':
-        try:
-            printError(f'FDISK -> Eliminacion {str(delete).upper()} no reconocida')
-        except:
-            printError(f'FDISK -> Eliminacion {delete} no reconocida')
-        return
+    # if delete != 'full':
+    #     try:
+    #         printError(f'FDISK -> Eliminacion {str(delete).upper()} no reconocida')
+    #     except:
+    #         printError(f'FDISK -> Eliminacion {delete} no reconocida')
+    #     return
     
-    if op == 'delete':
-        add = None
-    elif op == 'add':
-        if add == 0:
-            printError(f'FDISK -> No se puede agregar 0')
-        delete = None
-    else:
-        delete = None
-        add = None
+    # if op == 'delete':
+    #     add = None
+    # elif op == 'add':
+    #     if add == 0:
+    #         printError(f'FDISK -> No se puede agregar 0')
+    #     delete = None
+    # else:
+    #     delete = None
+    #     add = None
     
-    fdisk(path, size, unit, name, type, fit, delete, add)
+    t[0] += fdisk(path, size, unit, name, type, fit)
 
 def p_params_fdisk(t):
     '''params_fdisk : params_fdisk param_fdisk
@@ -239,21 +242,22 @@ def p_param_fdisk(t):
 def p_command_mount(t):
     'command_mount : MOUNT params_mount'
     
+    t[0] = ''
     required_params = ['path', 'name']
 
     for param in required_params:
         if param not in t[2]:
-            printError(f'MOUNT -> Parametro {param} requerido')
+            t[0] += f'MOUNT -> Parametro {param} requerido\n'
             return
         
     path = t[2].get('path')
     name = t[2].get('name')
 
     if path[-3:] != 'dsk':
-        printError(f'MOUNT -> La extension del archivo {path} debe ser .dsk')
+        t[0] += f'MOUNT -> La extension del archivo {path} debe ser .dsk\n'
         return
     
-    mount(path, name)
+    t[0] += mount(path, name)
 
 def p_params_mount(t):
     '''params_mount : params_mount param_mount
@@ -387,9 +391,11 @@ def p_param_rep(t):
 # Error rule for syntax errors
 def p_error(t):
     if t:
-        printError(f'Sintaxis no válida en la entrada: Token {t.type}, Valor {t.value}, en la linea {t.lexer.lineno}, columna {find_column(t.lexer.lexdata, t)}')
+        # printError(f'Sintaxis no válida en la entrada: Token {t.type}, Valor {t.value}, en la linea {t.lexer.lineno}, columna {find_column(t.lexer.lexdata, t)}')
+        raise Exception(f'Sintaxis no válida en la entrada: Token {t.type}, Valor {t.value}, en la linea {t.lexer.lineno}, columna {find_column(t.lexer.lexdata, t)}')
     else:
-        printError('Sintaxis no válida en la entrada')
+        # printError('Sintaxis no válida en la entrada')
+        raise Exception('Sintaxis no válida en la entrada')
 
 # Build the parser
 parser = yacc.yacc()

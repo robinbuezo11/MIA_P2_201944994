@@ -79,8 +79,9 @@ t_ignore = ' \t'
 # Error handling rule
 def t_error(t):
     errors.append(t.value[0])
-    printError(f'Caracter no reconocido: {t.value[0]} en la linea {t.lexer.lineno}, columna {find_column(t.lexer.lexdata, t)}, se omitirá')
-    t.lexer.skip(1)
+    # printError(f'Caracter no reconocido: {t.value[0]} en la linea {t.lexer.lineno}, columna {find_column(t.lexer.lexdata, t)}, se omitirá')
+    # t.lexer.skip(1)
+    raise Exception(f'Caracter no reconocido: {t.value[0]} en la linea {t.lexer.lineno}, columna {find_column(t.lexer.lexdata, t)}, se omitirá')
 
 def find_column(input, token):
     line_start = input.rfind('\n', 0, token.lexpos) + 1

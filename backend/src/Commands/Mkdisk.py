@@ -7,7 +7,7 @@ from Utils.Utilities import *
 
 def mkdisk(path, size, unit, fit):
     result = 'Ejecutando el comando MKDISK\n'
-    result += '***** Creando MBR *****\n'
+    result += '\n***** Creando MBR *****\n'
 
     size_bytes = get_sizeB(size, unit)
 
@@ -17,17 +17,17 @@ def mkdisk(path, size, unit, fit):
     mbr.set_info(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), size_bytes, fit)
     result += mbr.display_info()
 
-    print("\n***** Creando Disco *****")
+    result += "\n***** Creando Disco *****\n"
     directory, file_name = os.path.split(path)
     if directory != '':
         if not os.path.exists(directory):
             os.makedirs(directory)
 
-    if Fcreate_file(path):
+    res, msg = Fcreate_file(path)
+    if res:
         result += f'Se creo el disco {file_name} en {directory}\n'
     else:
-        printError(f'No se pudo crear el disco {file_name} en {directory}')
-        result += f'No se pudo crear el disco {file_name} en {directory}\n'
+        result += msg + f'No se pudo crear el disco {file_name} en {directory}\n'
         return result
 
     try:
@@ -38,10 +38,12 @@ def mkdisk(path, size, unit, fit):
 
     result += "\n***** Aplicando Tamaño *****\n"
     mb = get_sizeM(size_bytes, 'b')
-    if Winit_size(file, mb):
+
+    res, msg = Winit_size(file, mb)
+    if res:
         result += f'Se aplico el tamaño {mb}MB al disco {file_name}\n'
     else:
-        result += f'No se pudo aplicar el tamaño al disco {file_name}\n'
+        result += msg + f'No se pudo aplicar el tamaño al disco {file_name}\n'
         file.close()
         return result
     
@@ -51,10 +53,11 @@ def mkdisk(path, size, unit, fit):
         return result
 
     result += "\n***** Escribiendo MBR *****\n"
-    if Fwrite_displacement(file, 0, mbr):
+    res, msg = Fwrite_displacement(file, 0, mbr)
+    if res:
         result += "Se escribio el MBR correctamente\n"
     else:
-        result += "No se pudo escribir el MBR\n"
+        result += msg + "No se pudo escribir el MBR\n"
     
     try:
         file.close()
@@ -62,5 +65,5 @@ def mkdisk(path, size, unit, fit):
         result += f"{e}\n"
         return result
     
-    result += "\nFinalizando MKDISK\n"
+    result += "\nFinalizando MKDISK\n\n"
     return result

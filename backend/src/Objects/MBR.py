@@ -95,13 +95,14 @@ class MBR(ctypes.Structure):
         result += f"Fecha de creacion: {self.mbr_fecha_creacion.decode()}\n"
         result += f"Identificador: {self.mbr_dsk_signature}\n"
         result += f"Ajuste: {self.dsk_fit.decode().upper()}\n"
-        result += "\n* PARTICIONES *\n"
+        result += "* PARTICIONES *\n"
         for i in range(4):
             result += f"Particion {i+1}:\n"
             if self.partitions[i].part_type == b'\0':
                 result += "No hay particion\n"
             else:
                 result += self.partitions[i].display_info()
+            result += '-'*25 + '\n'
         return result
 
     def doSerialize(self):

@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from parser_ import *
-from Commands.Execute import execute
 import os, base64, mimetypes
 
 app = Flask(__name__)
@@ -18,13 +17,27 @@ def api():
 @app.route("/api/command", methods=["POST"])
 def command():
     data = request.get_json()
-    print(data["command"])
+    # print(data["command"])
+    data["command"] = data["command"].replace("\\", "/")
+    commands = data["command"].split("\n")
     
-    #parser = get_parser()
-    #parse_result = parser.parse(data["command"])
+    parser = get_parser()
+    result = ""
+    line = 1
+    for command in commands:
+        result += f"Linea {line}: {command}\n\n"
+        line += 1
+        if command == '' or command[0] == '#':
+            continue
+        try:
+            result += parser.parse(command)
+        except Exception as e:
+            result += f"{e}\n"
+            
+
     return jsonify({
         "status": "success",
-        "result": data["command"],
+        "result": result,
         "error": ""
     })
 

@@ -2,18 +2,19 @@ from Utils.Utilities import *
 from Utils.Fmanager import *
 
 def rmdisk(path):
-    printConsole('Ejecutando el comando RMDISK')
+    result = 'Ejecutando el comando RMDISK\n'
 
-    if not printWarning("Esta seguro que desea eliminar el disco? (s/n)"):
-        printConsole("Finalizando RMDISK\n")
-        return False
+    # if not printWarning("Esta seguro que desea eliminar el disco? (s/n)"):
+        # printConsole("Finalizando RMDISK\n")
+        # return False
 
-    print("***** Eliminando Disco *****")
+    result += "\n***** Eliminando Disco *****\n"
 
-    if Fdelete_file(path):
-        printSuccess(f'Se elimino el disco {path}')
+    res, msg = Fdelete_file(path)
+    if res:
+        result += f'Se elimino el disco {path}\n'
     else:
-        printError(f'No se pudo eliminar el disco {path}')
+        result += msg + f'No se pudo eliminar el disco {path}\n'
 
-    printConsole("Finalizando RMDISK\n")
-    return True
+    result += "\nFinalizando RMDISK\n\n"
+    return result

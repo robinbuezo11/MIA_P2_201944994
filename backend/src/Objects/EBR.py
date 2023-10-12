@@ -54,13 +54,14 @@ class EBR(ctypes.Structure):
         self._set_part_name(part_name)
     
     def display_info(self):
-        print("\n*** EBR ***")
-        print("Estado: ", self.part_status.decode().upper())
-        print("Ajuste: ", self.part_fit.decode().upper())
-        print("Inicio: ", self.part_start)
-        print(f"Tamaño: {self.part_s/1024} KB")
-        print("Siguiente: ", self.part_next)
-        print("Nombre: ", self.part_name.decode().upper(), "\n")
+        result = "\n*** EBR ***"
+        result += "\nEstado: " + self.part_status.decode().upper()
+        result += "\nAjuste: " + self.part_fit.decode().upper()
+        result += "\nInicio: " + str(self.part_start)
+        result += "\nTamaño: " + str(self.part_s/1024) + " KB"
+        result += "\nSiguiente: " + str(self.part_next)
+        result += "\nNombre: " + self.part_name.decode().upper() + "\n\n"
+        return result
 
     def doSerialize(self):
         serialize = struct.pack(
