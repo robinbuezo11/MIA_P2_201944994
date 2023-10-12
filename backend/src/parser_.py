@@ -27,12 +27,10 @@ def p_list_commands(t):
         t[0] = t[1]
     
 def p_commands(t): 
-    '''commands : command_execute
-                | command_mkdisk
+    '''commands : command_mkdisk
                 | command_rmdisk
                 | command_fdisk
                 | command_mount
-                | command_unmount
                 | command_mkfs
 
                 | command_pause
@@ -42,19 +40,19 @@ def p_commands(t):
 
 #------------------------------------------------------------
 #------------------------ EXECUTE ---------------------------
-def p_command_execute(t):
-    '''command_execute : EXECUTE GUION PATH IGUAL CADENA
-                       | EXECUTE GUION PATH IGUAL CADENA_SC'''
-    data = execute(t[5])
-    if data:
-        commands = data.split('\n')
-        line = 1
-        for command in commands:
-            print(f'Linea {line}: {command}\n')
-            line += 1
-            if command == '' or command[0] == '#':
-                continue
-            parser.parse(command)
+# def p_command_execute(t):
+#     '''command_execute : EXECUTE GUION PATH IGUAL CADENA
+#                        | EXECUTE GUION PATH IGUAL CADENA_SC'''
+#     data = execute(t[5])
+#     if data:
+#         commands = data.split('\n')
+#         line = 1
+#         for command in commands:
+#             print(f'Linea {line}: {command}\n')
+#             line += 1
+#             if command == '' or command[0] == '#':
+#                 continue
+#             parser.parse(command)
 
 #------------------------------------------------------------
 #------------------------ MKDISK ----------------------------
@@ -277,10 +275,10 @@ def p_param_mount(t):
 
 #------------------------------------------------------------
 #------------------------ UNMOUNT ---------------------------
-def p_command_unmount(t):
-    '''command_unmount : UNMOUNT GUION ID IGUAL CADENA
-                       | UNMOUNT GUION ID IGUAL CADENA_SC'''
-    unmount(t[5])
+# def p_command_unmount(t):
+#     '''command_unmount : UNMOUNT GUION ID IGUAL CADENA
+#                        | UNMOUNT GUION ID IGUAL CADENA_SC'''
+#     unmount(t[5])
 
 #------------------------------------------------------------
 #------------------------ MKFS ------------------------------
