@@ -285,32 +285,34 @@ def p_param_mount(t):
 def p_command_mkfs(t):
     '''command_mkfs : MKFS params_mkfs'''
 
+    t[0] = ''
     required_params = ['id']
 
     for param in required_params:
         if param not in t[2]:
-            printError(f'MKFS -> Parametro {param} requerido')
+            t[0] += f'MKFS -> Parametro {param} requerido'
             return
         
     id = t[2].get('id')
     type = t[2].get('type', 'full')
-    fs = t[2].get('fs', '2fs')
+    # fs = t[2].get('fs', '2fs')
 
     if type not in ['full']:
         try:
-            printError(f'MKFS -> Tipo {str(type).upper()} no reconocido')
+            t[0] += f'MKFS -> Tipo {str(type).upper()} no reconocido'
         except:
-            printError(f'MKFS -> Tipo {type} no reconocido')
+            t[0] += f'MKFS -> Tipo {type} no renocido'
         return
     
-    if fs not in ['2fs', '3fs']:
-        try:
-            printError(f'MKFS -> Sistema de archivos {str(fs).upper()} no reconocido')
-        except:
-            printError(f'MKFS -> Sistema de archivos {fs} no reconocido')
-        return
+    # if fs not in ['2fs', '3fs']:
+    #     try:
+    #         printError(f'MKFS -> Sistema de archivos {str(fs).upper()} no reconocido')
+    #     except:
+    #         printError(f'MKFS -> Sistema de archivos {fs} no reconocido')
+    #     return
     
-    mkfs(id, fs)
+    # mkfs(id, fs)
+    t[0] += mkfs(id)
 
 def p_params_mkfs(t):
     '''params_mkfs : params_mkfs param_mkfs
@@ -324,15 +326,16 @@ def p_params_mkfs(t):
 def p_param_mkfs(t):
     '''param_mkfs : GUION ID IGUAL CADENA
                     | GUION ID IGUAL CADENA_SC
-                    | GUION TYPE IGUAL CADENA_SC
-                    | GUION FS IGUAL CADENA_SC'''
+                    | GUION TYPE IGUAL CADENA_SC'''
+                    # | GUION FS IGUAL CADENA_SC'''
     t[0] = {t[2]: t[4]}
 
 #------------------------------------------------------------
 #------------------------ PAUSE -----------------------------
 def p_command_pause(t):
     'command_pause : PAUSE'
-    pause()
+    # pause()
+    t[0] = 'Ejecutando el comando PAUSE\n'
 
 #------------------------------------------------------------
 #------------------------ REP -------------------------------
