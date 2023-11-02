@@ -14,10 +14,10 @@ function Reports(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.get('http://localhost:5000/api/getPics?path=' + route)
+        axios.get('http://18.117.141.89:8000/api/getPics?path=' + route)
             .then((response) => {
                 if(response.data.status === 'success'){
-                    setImages(response.data.result);
+                    setImages(response.data.result.sort((a, b) => a.name.localeCompare(b.name)));
                 } else {
                     alert(response.data.error);
                 }
@@ -28,7 +28,7 @@ function Reports(){
 
     const handleLogout = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/api/logout')
+        axios.post('http://18.117.141.89:8000/api/logout')
             .then((response) => {
                 if(response.data.status === 'success'){
                     navigate('/');

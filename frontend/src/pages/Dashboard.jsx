@@ -13,7 +13,7 @@ function Dashboard() {
   const hiddenFileInput = React.useRef(null);
 
   function executeCommand(command) {
-    axios.post('http://localhost:5000/api/command', {
+    axios.post('http://18.117.141.89:8000/api/command', {
       command: command
     }).then((response) => {
       if(response.data.status === 'success') {

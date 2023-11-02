@@ -11,7 +11,7 @@ function Login(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/api/login', {
+        axios.post('http://18.117.141.89:8000/api/login', {
             user: user,
             password: password,
             id_partition: partition
