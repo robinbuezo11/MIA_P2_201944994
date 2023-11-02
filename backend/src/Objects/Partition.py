@@ -83,7 +83,7 @@ class Partition(ctypes.Structure):
     def generate_report_mbr(self, file):
         code = '''
             <tr>
-                <td bgcolor="#3371ff"><b>MBR</b></td>
+                <td bgcolor="#3371ff"><b>PARTICION</b></td>
             </tr>
             <tr>
                 <td><b>part_status      </b> ''' + self.part_status.decode().upper() + '''</td>
@@ -106,13 +106,15 @@ class Partition(ctypes.Structure):
             '''
         if self.part_type.decode() == 'e':
             ebr = EBR()
-            if not Fread_displacement(file, self.part_start, ebr):
+            ebr, msg = Fread_displacement(file, self.part_start, ebr)
+            if not ebr:
                 printError(f'No se pudo leer el EBR del disco {file.name}')
                 return code
             if ebr.part_s != -1:
                 code += ebr.generate_report_mbr()
             while ebr.part_next != -1:
-                if not Fread_displacement(file, ebr.part_next, ebr):
+                ebr, msg = Fread_displacement(file, ebr.part_next, ebr)
+                if not ebr:
                     printError(f'No se pudo leer el EBR del disco {file.name}')
                     return code
                 if ebr.part_s != -1:
@@ -123,7 +125,8 @@ class Partition(ctypes.Structure):
         if self.part_type.decode() == 'e':
             ebr = EBR()
             ebrsize = struct.calcsize(ebr.get_const())
-            if not Fread_displacement(file, self.part_start, ebr):
+            ebr, msg = Fread_displacement(file, self.part_start, ebr)
+            if not ebr:
                 printError(f'No se pudo leer el EBR del disco {file.name}')
                 return ''
             end_used = self.part_start
@@ -134,9 +137,10 @@ class Partition(ctypes.Structure):
                 code += f'EBR|Lógica\\n{(((ebr.part_s)/size_disk)*100):.2f}% del disco|'
                 end_used = ebr.part_start + ebr.part_s
 
-                if not Fread_displacement(file, ebr.part_next, ebr):
+                ebr, msg = Fread_displacement(file, ebr.part_next, ebr)
+                if not ebr:
                     printError(f'No se pudo leer el EBR del disco {file.name}')
-                    return ''
+                    return code
             if ebr.part_s != -1:
                 if end_used != ebr.part_start - ebrsize:
                     code += f'Libre\\n{((((ebr.part_start-ebrsize) - end_used)/size_disk)*100):.2f}% del disco'
@@ -194,30 +198,38 @@ class Partition(ctypes.Structure):
     def generate_report_bm_inode(self, file):
         try:
             super_block = SuperBlock()
-            if not Fread_displacement(file, self.part_start, super_block):
-                printError(f'No se pudo leer el Super Bloque del disco {file.name}')
-                return ''
+            super_block, msg = Fread_displacement(file, self.part_start, super_block)
+            if not super_block:
+                code = f'No se pudo leer el Super Bloque del disco {file.name}' + msg
+                return False, code
             
-            code = Fread_displacement_data(file, super_block.s_bm_inode_start, super_block.s_inodes_count)
+            result, code = Fread_displacement_data(file, super_block.s_bm_inode_start, super_block.s_inodes_count)
+            if not result:
+                code = f'No se pudo leer el bitmap de inodos del disco {file.name}' + code
+                return False, code
             code = code.decode()
         except Exception as e:
-            print(f'Error al generar el reporte: {e}')
-            code = ''
-        return code
+            code = f'Error al generar el reporte: {e}'
+            return False, code
+        return True, code
     
     def generate_report_bm_block(self, file):
         try:
             super_block = SuperBlock()
-            if not Fread_displacement(file, self.part_start, super_block):
-                printError(f'No se pudo leer el Super Bloque del disco {file.name}')
-                return ''
+            super_block, msg = Fread_displacement(file, self.part_start, super_block)
+            if not super_block:
+                code = f'No se pudo leer el Super Bloque del disco {file.name}' + msg
+                return False, code
             
-            code = Fread_displacement_data(file, super_block.s_bm_block_start, super_block.s_blocks_count)
+            result, code = Fread_displacement_data(file, super_block.s_bm_block_start, super_block.s_blocks_count)
+            if not result:
+                code = f'No se pudo leer el bitmap de bloques del disco {file.name}' + code
+                return False, code
             code = code.decode()
         except Exception as e:
-            print(f'Error al generar el reporte: {e}')
-            code = ''
-        return code
+            code = f'Error al generar el reporte: {e}'
+            return False, code
+        return True, code
     
     def generate_report_tree(self, file):
         try:
@@ -228,16 +240,17 @@ class Partition(ctypes.Structure):
                     bgcolor="#3371ff" node [style=filled shape=record]'''
             
             super_block = SuperBlock()
-            if not Fread_displacement(file, self.part_start, super_block):
-                printError(f'No se pudo leer el Super Bloque del disco {file.name}')
-                return code + '''tree [label = "No se pudo leer el Super Bloque"];}'''
+            super_block, msg = Fread_displacement(file, self.part_start, super_block)
+            if not super_block:
+                code = f'No se pudo leer el Super Bloque del disco {file.name}'
+                return False, code + msg
             
             code += super_block.generate_report_tree(file)
             code += '}\n}'
         except Exception as e:
-            print(f'Error al generar el reporte: {e}')
-            code = ''
-        return code
+            code = f'Error al generar el reporte: {e}'
+            return False, code
+        return True, code
     
     def generate_report_sb(self, file):
         try:
@@ -248,28 +261,33 @@ class Partition(ctypes.Structure):
                     bgcolor="#3371ff" node [style=filled shape=record] '''
             
             super_block = SuperBlock()
-            if not Fread_displacement(file, self.part_start, super_block):
-                printError(f'No se pudo leer el Super Bloque del disco {file.name}')
-                return code + '''sb [label = "No se pudo leer el Super Bloque"];}\n}'''
+            super_block, msg = Fread_displacement(file, self.part_start, super_block)
+            if not super_block:
+                code = f'No se pudo leer el Super Bloque del disco {file.name}'
+                return False, code + msg
             code += super_block.generate_report_sb(file)
             code += '}\n}'
         except Exception as e:
-            print(f'Error al generar el reporte: {e}')
-            code = ''
-        return code
+            code = f'Error al generar el reporte: {e}'
+            return False, code
+        return True, code
     
     def generate_report_file(self, file, path):
         try:
             super_block = SuperBlock()
-            if not Fread_displacement(file, self.part_start, super_block):
-                printError(f'No se pudo leer el Super Bloque del disco {file.name}')
-                return ''
+            super_block, msg = Fread_displacement(file, self.part_start, super_block)
+            if not super_block:
+                code = f'No se pudo leer el Super Bloque del disco {file.name}'
+                return False, code + msg
             
-            code = super_block.generate_report_file(file, path)
+            result, code = super_block.generate_report_file(file, path)
+            if not result:
+                code = f'No se pudo leer el bitmap de bloques del disco {file.name}' + code
+                return False, code
         except Exception as e:
-            print(f'Error al generar el reporte: {e}')
-            code = ''
-        return code
+            code = f'Error al generar el reporte: {e}'
+            return False, code
+        return True, code
     
     def generate_report_ls(self, file):
         return ''

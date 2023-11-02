@@ -230,9 +230,9 @@ def p_param_fdisk(t):
                     | GUION NAME IGUAL CADENA
                     | GUION NAME IGUAL CADENA_SC
                     | GUION TYPE IGUAL CADENA_SC
-                    | GUION FIT IGUAL CADENA_SC
-                    | GUION DELETE IGUAL CADENA_SC
-                    | GUION ADD IGUAL ENTERO'''
+                    | GUION FIT IGUAL CADENA_SC'''
+                    # | GUION DELETE IGUAL CADENA_SC
+                    # | GUION ADD IGUAL ENTERO'''
     t[0] = {t[2]: t[4]}
 
 #------------------------------------------------------------
@@ -342,6 +342,7 @@ def p_command_pause(t):
 def p_command_rep(t):
     '''command_rep : REP params_rep'''
 
+    t[0] = ''
     required_params = ['name', 'path', 'id']
 
     name = t[2].get('name')
@@ -354,21 +355,21 @@ def p_command_rep(t):
 
     for param in required_params:
         if param not in t[2]:
-            printError(f'REP -> Parametro {param} requerido')
+            t[0] += f'REP -> Parametro {param} requerido\n'
             return
 
-    if name not in ['mbr', 'disk', 'inode', 'journaling', 'block', 'bm_inode', 'bm_block', 'tree', 'sb', 'file', 'ls']:
+    if name not in ['mbr', 'disk', 'bm_inode', 'bm_block', 'tree', 'sb', 'file']:
         try:
-            printError(f'REP -> Reporte {str(name).upper()} no reconocido')
+            t[0] += f'REP -> Reporte {str(name).upper()} no reconocido\n'
         except:
-            printError(f'REP -> Reporte {name} no reconocido')
+            t[0] += f'REP -> Reporte {name} no reconocido\n'
         return
     
     if path[-3:] not in ['png', 'jpg', 'pdf', 'txt']:
-        printError(f'REP -> La extension del archivo {path} debe ser .txt, .png, .jpg o .pdf')
+        t[0] += f'REP -> La extension del archivo {path} debe ser .txt, .png, .jpg o .pdf\n'
         return
     
-    rep(name, path, id, ruta)
+    t[0] = rep(name, path, id, ruta)
 
 def p_params_rep(t):
     '''params_rep : params_rep param_rep

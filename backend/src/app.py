@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from parser_ import *
+from Commands.Login import login
+from Commands.Logout import logout
 import os, base64, mimetypes
 
 app = Flask(__name__)
@@ -41,7 +43,38 @@ def command():
         "error": ""
     })
 
-@app.route("/getPics", methods=["GET"])
+@app.route("/api/login", methods=["POST"])
+def log():
+    data = request.get_json()
+    
+    try:
+        user = data["user"]
+        password = data["password"]
+        id_partition = data["id_partition"]
+
+        res, msg = login(user, password, id_partition)
+        return jsonify({
+            "status": "success" if res else "error",
+            "result": msg,
+            "error": "" if res else msg
+        })
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "result": "",
+            "error": str(e)
+        })
+    
+@app.route("/api/logout", methods=["POST"])
+def log_out():
+    res, msg = logout()
+    return jsonify({
+        "status": "success" if res else "error",
+        "result": msg,
+        "error": "" if res else msg
+    })
+
+@app.route("/api/getPics", methods=["GET"])
 def getPics():
     path = request.args.get('path')
 

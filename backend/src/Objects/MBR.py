@@ -156,9 +156,9 @@ class MBR(ctypes.Structure):
                 </table>>];
             }'''
         except Exception as e:
-            print(f'Error al generar el reporte: {e}')
-            code = ''
-        return code
+            code = f'Error al generar el reporte: {e}'
+            return False, code
+        return True, code
     
     def generate_report_disk(self, file, disk_name):
         try:
@@ -179,6 +179,6 @@ class MBR(ctypes.Structure):
             code += '''}}"];
             }'''
         except Exception as e:
-            print(f'Error al generar el reporte: {e}')
-            code = ''
-        return code
+            code = f'Error al generar el reporte: {e}'
+            return False, code
+        return True, code

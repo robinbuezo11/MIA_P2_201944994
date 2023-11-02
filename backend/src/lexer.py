@@ -7,7 +7,7 @@ errors = []
 
 # Reserved words
 reserved = {
-    'execute' : 'EXECUTE',
+    # 'execute' : 'EXECUTE',
     'mkdisk' : 'MKDISK',
     'rmdisk' : 'RMDISK',
     'fdisk' : 'FDISK',

@@ -1,5 +1,5 @@
 mounted_partitions = []
-user_session = None
+user_session = []
 
 def display_mounted_partitions():
     result = "\n***** Particiones montadas *****\n"
@@ -20,3 +20,4 @@ def get_mounted_partitionbyId(id):
         if data['id'].lower() == id.lower():
             return data
     return None
+

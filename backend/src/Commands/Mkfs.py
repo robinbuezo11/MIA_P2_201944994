@@ -98,7 +98,7 @@ def format_2fs(n, partition, path, superblock, date):
     inode1.i_perm = 664
     inode1.i_block[0] = 1
 
-    data_user = '1, G,  root\n1,    U,  root,   root,   123\n'
+    data_user = '1,G,root\n1,U,root,root,123\n'
     fileblock = FileBlock()
     fileblock.b_content = coding_str(data_user, 64)
 

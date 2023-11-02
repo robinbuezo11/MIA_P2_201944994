@@ -4,138 +4,167 @@ from Utils.Utilities import *
 from Utils.Globals import *
 
 def rep(name, path, id, ruta):
-    printConsole('Ejecutando el comando REP')
-    print('\n***** Buscando el disco *****')
+    result = 'Ejecutando el comando REP\n'
+    result += '***** Buscando el disco *****\n'
     mounted_partition = get_mounted_partitionbyId(id)
     if not mounted_partition:
-        printError(f'No se encontró la partición {id}')
-        return False
+        result += f'No se encontró la partición {id}\n'
+        return result
     
-    print('\n***** Abriendo el disco *****')
+    result += '***** Abriendo el disco *****\n'
     try:
         file = open(mounted_partition['path'], 'rb+')
     except:
-        printError(f'No se pudo abrir el disco {mounted_partition["path"]}')
-        return False
+        result += f'No se pudo abrir el disco {mounted_partition["path"]}\n'
+        return result
     
-    print('\n***** Leyendo el MBR *****')
+    result += '***** Leyendo el MBR *****\n'
     mbr = MBR()
-    if not Fread_displacement(file, 0, mbr):
-        printError(f'No se pudo leer el MBR del disco {mounted_partition["path"]}')
+    mbr, msg = Fread_displacement(file, 0, mbr)
+    if not mbr:
+        result += f'No se pudo leer el MBR del disco {mounted_partition["path"]}\n'
         file.close()
-        return False
+        return result + msg
     
     partition = mounted_partition['partition']
     
     # We have to check the type of report to generate in base of the name
-    print('\n***** Generando el reporte *****')
+    result += '***** Generando el reporte *****\n'
     if name == 'mbr':
-        code = mbr.generate_report_mbr(file)
+        res, code = mbr.generate_report_mbr(file)
+        if not res:
+            result += code
+            file.close()
+            return result
 
         if not execute_graphviz(code, path):
-            printError(f'No se pudo generar el reporte {name}')
+            result += f'No se pudo generar el reporte {name}\n'
             file.close()
-            return False
-        printSuccess(f'Se genero el reporte {name} correctamente')
+            return result
+        result += f'Se genero el reporte {name} correctamente\n'
     
     elif name == 'disk':
-        code = mbr.generate_report_disk(file, id[3:])
+        res, code = mbr.generate_report_disk(file, id[3:])
+        if not res:
+            result += code
+            file.close()
+            return result
 
         if not execute_graphviz(code, path):
-            printError(f'No se pudo generar el reporte {name}')
+            result += f'No se pudo generar el reporte {name}\n'
             file.close()
-            return False
-        printSuccess(f'Se genero el reporte {name} correctamente')
+            return result
+        result += f'Se genero el reporte {name} correctamente\n'
 
-    elif name == 'inode':
-        code = partition.generate_report_inode(file)
+    # elif name == 'inode':
+    #     code = partition.generate_report_inode(file)
 
-        if not execute_graphviz(code, path):
-            printError(f'No se pudo generar el reporte {name}')
-            file.close()
-            return False
-        printSuccess(f'Se genero el reporte {name} correctamente')
+    #     if not execute_graphviz(code, path):
+    #         printError(f'No se pudo generar el reporte {name}')
+    #         file.close()
+    #         return False
+    #     printSuccess(f'Se genero el reporte {name} correctamente')
 
-    elif name == 'block':
-        code = partition.generate_report_block(file)
+    # elif name == 'block':
+    #     code = partition.generate_report_block(file)
 
-        if not execute_graphviz(code, path):
-            printError(f'No se pudo generar el reporte {name}')
-            file.close()
-            return False
-        printSuccess(f'Se genero el reporte {name} correctamente')
+    #     if not execute_graphviz(code, path):
+    #         printError(f'No se pudo generar el reporte {name}')
+    #         file.close()
+    #         return False
+    #     printSuccess(f'Se genero el reporte {name} correctamente')
 
     elif name == 'bm_inode':
-        code = partition.generate_report_bm_inode(file)
+        res, code = partition.generate_report_bm_inode(file)
+        if not res:
+            result += code
+            file.close()
+            return result
 
         if not save_txt20(code, path):
-            printError(f'No se pudo generar el reporte {name}')
+            result += f'No se pudo generar el reporte {name}\n'
             file.close()
-            return False
-        printSuccess(f'Se genero el reporte {name} correctamente')
+            return result
+        result += f'Se genero el reporte {name} correctamente\n'
 
     elif name == 'bm_block':
-        code = partition.generate_report_bm_block(file)
+        res, code = partition.generate_report_bm_block(file)
+        if not res:
+            result += code
+            file.close()
+            return result
 
         if not save_txt20(code, path):
-            printError(f'No se pudo generar el reporte {name}')
+            result += f'No se pudo generar el reporte {name}\n'
             file.close()
-            return False
-        printSuccess(f'Se genero el reporte {name} correctamente')
+            return result
+        result += f'Se genero el reporte {name} correctamente\n'
 
     elif name == 'tree':
-        code = partition.generate_report_tree(file)
+        res, code = partition.generate_report_tree(file)
+        if not res:
+            result += code
+            file.close()
+            return result
 
         if not execute_graphviz(code, path):
-            printError(f'No se pudo generar el reporte {name}')
+            result += f'No se pudo generar el reporte {name}\n'
             file.close()
-            return False
-        printSuccess(f'Se genero el reporte {name} correctamente')
+            return result
+        result += f'Se genero el reporte {name} correctamente\n'
 
     elif name == 'sb':
-        code = partition.generate_report_sb(file)
+        res, code = partition.generate_report_sb(file)
+        if not res:
+            result += code
+            file.close()
+            return result
 
         if not execute_graphviz(code, path):
-            printError(f'No se pudo generar el reporte {name}')
+            result += f'No se pudo generar el reporte {name}\n'
             file.close()
-            return False
-        printSuccess(f'Se genero el reporte {name} correctamente')
+            return result
+        result += f'Se genero el reporte {name} correctamente\n'
         
     elif name == 'file':
-        code = partition.generate_report_file(file, ruta)
+        res, code = partition.generate_report_file(file, ruta)
+        if not res:
+            result += code
+            file.close()
+            return result
 
         if not save_txt(code, path):
-            printError(f'No se pudo generar el reporte {name}')
+            result += f'No se pudo generar el reporte {name}\n'
             file.close()
-            return False
-        printSuccess(f'Se genero el reporte {name} correctamente')
+            return result
+        result += f'Se genero el reporte {name} correctamente\n'
 
-    elif name == 'ls':
-        code = partition.generate_report_ls(file, ruta)
+    # elif name == 'ls':
+    #     code = partition.generate_report_ls(file, ruta)
 
-        if not execute_graphviz(code, path):
-            printError(f'No se pudo generar el reporte {name}')
-            file.close()
-            return False
-        printSuccess(f'Se genero el reporte {name} correctamente')
+    #     if not execute_graphviz(code, path):
+    #         printError(f'No se pudo generar el reporte {name}')
+    #         file.close()
+    #         return False
+    #     printSuccess(f'Se genero el reporte {name} correctamente')
 
-    elif name == 'journaling':
-        code = partition.generate_report_journaling(file)
+    # elif name == 'journaling':
+    #     code = partition.generate_report_journaling(file)
 
-        if not execute_graphviz(code, path):
-            printError(f'No se pudo generar el reporte {name}')
-            file.close()
-            return False
-        printSuccess(f'Se genero el reporte {name} correctamente')
+    #     if not execute_graphviz(code, path):
+    #         printError(f'No se pudo generar el reporte {name}')
+    #         file.close()
+    #         return False
+    #     printSuccess(f'Se genero el reporte {name} correctamente')
         
     try:
         file.close()
     except:
-        printError(f'No se pudo cerrar el disco {mounted_partition["path"]}')
-        return False    
+        result += f'No se pudo cerrar el disco {mounted_partition["path"]}\n'
+        return result
     
-    printConsole("Finalizando REP\n")
-    return True
+    result += '***** Finalizando REP *****\n'
+    return result
 
 def execute_graphviz(code, path):
     if code != '':

@@ -385,14 +385,17 @@ class SuperBlock(ctypes.Structure):
             connections = ''
             index = 0
             for i in range(self.s_inodes_count):
-                Fread_displacement(file, self.s_inode_start + i * struct.calcsize(inode.get_const()), inode)
+                inode, msg = Fread_displacement(file, self.s_inode_start + i * struct.calcsize(inode.get_const()), inode)
+                if not inode:
+                    printError(msg)
+                    return ''
                 if inode.i_s != -1:
                     index = i
                     break
             code, connections = self.graph_tree([None,None], inode, file, index)
         except Exception as e:
             printError(f'Error al generar el reporte de arbol. {e}')
-            code = ''
+            return code
         return code + connections + '\n'
 
     def graph_tree(self, parent, obj, file, index):
@@ -531,8 +534,7 @@ class SuperBlock(ctypes.Structure):
                         found = True
                         break
                 if not found:
-                    printError(f'No se encontro el directorio {folder_name}')
-                    return ''
+                    return False, f'No se encontro el directorio {folder_name}'
                 
             # Get the file
             file_name = path.pop(0)
@@ -547,8 +549,7 @@ class SuperBlock(ctypes.Structure):
                             Fread_displacement(file, self.s_block_start + inode.i_block[j] * size_block, block)
                             code += block.b_content.decode()
                             break
-                    return code
+                    return True, code
         except Exception as e:
-            printError(f'Error al generar el reporte de archivo. {e}')
-            return ''
+            return False, f'Error al generar el reporte de archivo. {e}'
         

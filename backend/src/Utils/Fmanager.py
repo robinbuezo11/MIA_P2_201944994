@@ -44,10 +44,10 @@ def Fread_displacement_data(file, displacement,size):
         file.seek(displacement)
         data = file.read(size)
         #print("Size data: ",  len(data))
-        return data
+        return data, ''
     except Exception as e:
         printError(f"{e}")
-        return None
+        return None, f"{e}\n"
 
 def Fcreate_file(file_name):
     try:
