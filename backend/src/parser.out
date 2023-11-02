@@ -1,0 +1,1990 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> init
+Rule 1     init -> list_commands
+Rule 2     list_commands -> list_commands commands
+Rule 3     list_commands -> commands
+Rule 4     commands -> command_execute
+Rule 5     commands -> command_mkdisk
+Rule 6     commands -> command_rmdisk
+Rule 7     commands -> command_fdisk
+Rule 8     commands -> command_mount
+Rule 9     commands -> command_unmount
+Rule 10    commands -> command_mkfs
+Rule 11    commands -> command_pause
+Rule 12    commands -> command_rep
+Rule 13    commands -> COMMENT
+Rule 14    command_execute -> EXECUTE GUION PATH IGUAL CADENA
+Rule 15    command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC
+Rule 16    command_mkdisk -> MKDISK params_mkdisk
+Rule 17    params_mkdisk -> params_mkdisk param_mkdisk
+Rule 18    params_mkdisk -> param_mkdisk
+Rule 19    param_mkdisk -> GUION PATH IGUAL CADENA
+Rule 20    param_mkdisk -> GUION PATH IGUAL CADENA_SC
+Rule 21    param_mkdisk -> GUION SIZE IGUAL ENTERO
+Rule 22    param_mkdisk -> GUION UNIT IGUAL CADENA_SC
+Rule 23    param_mkdisk -> GUION FIT IGUAL CADENA_SC
+Rule 24    command_rmdisk -> RMDISK GUION PATH IGUAL CADENA
+Rule 25    command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC
+Rule 26    command_fdisk -> FDISK params_fdisk
+Rule 27    params_fdisk -> params_fdisk param_fdisk
+Rule 28    params_fdisk -> param_fdisk
+Rule 29    param_fdisk -> GUION PATH IGUAL CADENA
+Rule 30    param_fdisk -> GUION PATH IGUAL CADENA_SC
+Rule 31    param_fdisk -> GUION SIZE IGUAL ENTERO
+Rule 32    param_fdisk -> GUION UNIT IGUAL CADENA_SC
+Rule 33    param_fdisk -> GUION NAME IGUAL CADENA
+Rule 34    param_fdisk -> GUION NAME IGUAL CADENA_SC
+Rule 35    param_fdisk -> GUION TYPE IGUAL CADENA_SC
+Rule 36    param_fdisk -> GUION FIT IGUAL CADENA_SC
+Rule 37    param_fdisk -> GUION DELETE IGUAL CADENA_SC
+Rule 38    param_fdisk -> GUION ADD IGUAL ENTERO
+Rule 39    command_mount -> MOUNT params_mount
+Rule 40    params_mount -> params_mount param_mount
+Rule 41    params_mount -> param_mount
+Rule 42    param_mount -> GUION PATH IGUAL CADENA
+Rule 43    param_mount -> GUION PATH IGUAL CADENA_SC
+Rule 44    param_mount -> GUION NAME IGUAL CADENA
+Rule 45    param_mount -> GUION NAME IGUAL CADENA_SC
+Rule 46    command_unmount -> UNMOUNT GUION ID IGUAL CADENA
+Rule 47    command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC
+Rule 48    command_mkfs -> MKFS params_mkfs
+Rule 49    params_mkfs -> params_mkfs param_mkfs
+Rule 50    params_mkfs -> param_mkfs
+Rule 51    param_mkfs -> GUION ID IGUAL CADENA
+Rule 52    param_mkfs -> GUION ID IGUAL CADENA_SC
+Rule 53    param_mkfs -> GUION TYPE IGUAL CADENA_SC
+Rule 54    param_mkfs -> GUION FS IGUAL CADENA_SC
+Rule 55    command_pause -> PAUSE
+Rule 56    command_rep -> REP params_rep
+Rule 57    params_rep -> params_rep param_rep
+Rule 58    params_rep -> param_rep
+Rule 59    param_rep -> GUION NAME IGUAL CADENA_SC
+Rule 60    param_rep -> GUION PATH IGUAL CADENA
+Rule 61    param_rep -> GUION PATH IGUAL CADENA_SC
+Rule 62    param_rep -> GUION ID IGUAL CADENA
+Rule 63    param_rep -> GUION ID IGUAL CADENA_SC
+Rule 64    param_rep -> GUION RUTA IGUAL CADENA
+Rule 65    param_rep -> GUION RUTA IGUAL CADENA_SC
+
+Terminals, with rules where they appear
+
+ADD                  : 38
+CADENA               : 14 19 24 29 33 42 44 46 51 60 62 64
+CADENA_SC            : 15 20 22 23 25 30 32 34 35 36 37 43 45 47 52 53 54 59 61 63 65
+COMMENT              : 13
+DELETE               : 37
+ENTERO               : 21 31 38
+EXECUTE              : 14 15
+FDISK                : 26
+FIT                  : 23 36
+FS                   : 54
+GUION                : 14 15 19 20 21 22 23 24 25 29 30 31 32 33 34 35 36 37 38 42 43 44 45 46 47 51 52 53 54 59 60 61 62 63 64 65
+ID                   : 46 47 51 52 62 63
+IGUAL                : 14 15 19 20 21 22 23 24 25 29 30 31 32 33 34 35 36 37 38 42 43 44 45 46 47 51 52 53 54 59 60 61 62 63 64 65
+MKDISK               : 16
+MKFS                 : 48
+MOUNT                : 39
+NAME                 : 33 34 44 45 59
+PATH                 : 14 15 19 20 24 25 29 30 42 43 60 61
+PAUSE                : 55
+REP                  : 56
+RMDISK               : 24 25
+RUTA                 : 64 65
+SIZE                 : 21 31
+TYPE                 : 35 53
+UNIT                 : 22 32
+UNMOUNT              : 46 47
+error                : 
+
+Nonterminals, with rules where they appear
+
+command_execute      : 4
+command_fdisk        : 7
+command_mkdisk       : 5
+command_mkfs         : 10
+command_mount        : 8
+command_pause        : 11
+command_rep          : 12
+command_rmdisk       : 6
+command_unmount      : 9
+commands             : 2 3
+init                 : 0
+list_commands        : 1 2
+param_fdisk          : 27 28
+param_mkdisk         : 17 18
+param_mkfs           : 49 50
+param_mount          : 40 41
+param_rep            : 57 58
+params_fdisk         : 26 27
+params_mkdisk        : 16 17
+params_mkfs          : 48 49
+params_mount         : 39 40
+params_rep           : 56 57
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . init
+    (1) init -> . list_commands
+    (2) list_commands -> . list_commands commands
+    (3) list_commands -> . commands
+    (4) commands -> . command_execute
+    (5) commands -> . command_mkdisk
+    (6) commands -> . command_rmdisk
+    (7) commands -> . command_fdisk
+    (8) commands -> . command_mount
+    (9) commands -> . command_unmount
+    (10) commands -> . command_mkfs
+    (11) commands -> . command_pause
+    (12) commands -> . command_rep
+    (13) commands -> . COMMENT
+    (14) command_execute -> . EXECUTE GUION PATH IGUAL CADENA
+    (15) command_execute -> . EXECUTE GUION PATH IGUAL CADENA_SC
+    (16) command_mkdisk -> . MKDISK params_mkdisk
+    (24) command_rmdisk -> . RMDISK GUION PATH IGUAL CADENA
+    (25) command_rmdisk -> . RMDISK GUION PATH IGUAL CADENA_SC
+    (26) command_fdisk -> . FDISK params_fdisk
+    (39) command_mount -> . MOUNT params_mount
+    (46) command_unmount -> . UNMOUNT GUION ID IGUAL CADENA
+    (47) command_unmount -> . UNMOUNT GUION ID IGUAL CADENA_SC
+    (48) command_mkfs -> . MKFS params_mkfs
+    (55) command_pause -> . PAUSE
+    (56) command_rep -> . REP params_rep
+
+    COMMENT         shift and go to state 13
+    EXECUTE         shift and go to state 14
+    MKDISK          shift and go to state 15
+    RMDISK          shift and go to state 16
+    FDISK           shift and go to state 17
+    MOUNT           shift and go to state 18
+    UNMOUNT         shift and go to state 19
+    MKFS            shift and go to state 20
+    PAUSE           shift and go to state 21
+    REP             shift and go to state 22
+
+    init                           shift and go to state 1
+    list_commands                  shift and go to state 2
+    commands                       shift and go to state 3
+    command_execute                shift and go to state 4
+    command_mkdisk                 shift and go to state 5
+    command_rmdisk                 shift and go to state 6
+    command_fdisk                  shift and go to state 7
+    command_mount                  shift and go to state 8
+    command_unmount                shift and go to state 9
+    command_mkfs                   shift and go to state 10
+    command_pause                  shift and go to state 11
+    command_rep                    shift and go to state 12
+
+state 1
+
+    (0) S' -> init .
+
+
+
+state 2
+
+    (1) init -> list_commands .
+    (2) list_commands -> list_commands . commands
+    (4) commands -> . command_execute
+    (5) commands -> . command_mkdisk
+    (6) commands -> . command_rmdisk
+    (7) commands -> . command_fdisk
+    (8) commands -> . command_mount
+    (9) commands -> . command_unmount
+    (10) commands -> . command_mkfs
+    (11) commands -> . command_pause
+    (12) commands -> . command_rep
+    (13) commands -> . COMMENT
+    (14) command_execute -> . EXECUTE GUION PATH IGUAL CADENA
+    (15) command_execute -> . EXECUTE GUION PATH IGUAL CADENA_SC
+    (16) command_mkdisk -> . MKDISK params_mkdisk
+    (24) command_rmdisk -> . RMDISK GUION PATH IGUAL CADENA
+    (25) command_rmdisk -> . RMDISK GUION PATH IGUAL CADENA_SC
+    (26) command_fdisk -> . FDISK params_fdisk
+    (39) command_mount -> . MOUNT params_mount
+    (46) command_unmount -> . UNMOUNT GUION ID IGUAL CADENA
+    (47) command_unmount -> . UNMOUNT GUION ID IGUAL CADENA_SC
+    (48) command_mkfs -> . MKFS params_mkfs
+    (55) command_pause -> . PAUSE
+    (56) command_rep -> . REP params_rep
+
+    $end            reduce using rule 1 (init -> list_commands .)
+    COMMENT         shift and go to state 13
+    EXECUTE         shift and go to state 14
+    MKDISK          shift and go to state 15
+    RMDISK          shift and go to state 16
+    FDISK           shift and go to state 17
+    MOUNT           shift and go to state 18
+    UNMOUNT         shift and go to state 19
+    MKFS            shift and go to state 20
+    PAUSE           shift and go to state 21
+    REP             shift and go to state 22
+
+    commands                       shift and go to state 23
+    command_execute                shift and go to state 4
+    command_mkdisk                 shift and go to state 5
+    command_rmdisk                 shift and go to state 6
+    command_fdisk                  shift and go to state 7
+    command_mount                  shift and go to state 8
+    command_unmount                shift and go to state 9
+    command_mkfs                   shift and go to state 10
+    command_pause                  shift and go to state 11
+    command_rep                    shift and go to state 12
+
+state 3
+
+    (3) list_commands -> commands .
+
+    COMMENT         reduce using rule 3 (list_commands -> commands .)
+    EXECUTE         reduce using rule 3 (list_commands -> commands .)
+    MKDISK          reduce using rule 3 (list_commands -> commands .)
+    RMDISK          reduce using rule 3 (list_commands -> commands .)
+    FDISK           reduce using rule 3 (list_commands -> commands .)
+    MOUNT           reduce using rule 3 (list_commands -> commands .)
+    UNMOUNT         reduce using rule 3 (list_commands -> commands .)
+    MKFS            reduce using rule 3 (list_commands -> commands .)
+    PAUSE           reduce using rule 3 (list_commands -> commands .)
+    REP             reduce using rule 3 (list_commands -> commands .)
+    $end            reduce using rule 3 (list_commands -> commands .)
+
+
+state 4
+
+    (4) commands -> command_execute .
+
+    COMMENT         reduce using rule 4 (commands -> command_execute .)
+    EXECUTE         reduce using rule 4 (commands -> command_execute .)
+    MKDISK          reduce using rule 4 (commands -> command_execute .)
+    RMDISK          reduce using rule 4 (commands -> command_execute .)
+    FDISK           reduce using rule 4 (commands -> command_execute .)
+    MOUNT           reduce using rule 4 (commands -> command_execute .)
+    UNMOUNT         reduce using rule 4 (commands -> command_execute .)
+    MKFS            reduce using rule 4 (commands -> command_execute .)
+    PAUSE           reduce using rule 4 (commands -> command_execute .)
+    REP             reduce using rule 4 (commands -> command_execute .)
+    $end            reduce using rule 4 (commands -> command_execute .)
+
+
+state 5
+
+    (5) commands -> command_mkdisk .
+
+    COMMENT         reduce using rule 5 (commands -> command_mkdisk .)
+    EXECUTE         reduce using rule 5 (commands -> command_mkdisk .)
+    MKDISK          reduce using rule 5 (commands -> command_mkdisk .)
+    RMDISK          reduce using rule 5 (commands -> command_mkdisk .)
+    FDISK           reduce using rule 5 (commands -> command_mkdisk .)
+    MOUNT           reduce using rule 5 (commands -> command_mkdisk .)
+    UNMOUNT         reduce using rule 5 (commands -> command_mkdisk .)
+    MKFS            reduce using rule 5 (commands -> command_mkdisk .)
+    PAUSE           reduce using rule 5 (commands -> command_mkdisk .)
+    REP             reduce using rule 5 (commands -> command_mkdisk .)
+    $end            reduce using rule 5 (commands -> command_mkdisk .)
+
+
+state 6
+
+    (6) commands -> command_rmdisk .
+
+    COMMENT         reduce using rule 6 (commands -> command_rmdisk .)
+    EXECUTE         reduce using rule 6 (commands -> command_rmdisk .)
+    MKDISK          reduce using rule 6 (commands -> command_rmdisk .)
+    RMDISK          reduce using rule 6 (commands -> command_rmdisk .)
+    FDISK           reduce using rule 6 (commands -> command_rmdisk .)
+    MOUNT           reduce using rule 6 (commands -> command_rmdisk .)
+    UNMOUNT         reduce using rule 6 (commands -> command_rmdisk .)
+    MKFS            reduce using rule 6 (commands -> command_rmdisk .)
+    PAUSE           reduce using rule 6 (commands -> command_rmdisk .)
+    REP             reduce using rule 6 (commands -> command_rmdisk .)
+    $end            reduce using rule 6 (commands -> command_rmdisk .)
+
+
+state 7
+
+    (7) commands -> command_fdisk .
+
+    COMMENT         reduce using rule 7 (commands -> command_fdisk .)
+    EXECUTE         reduce using rule 7 (commands -> command_fdisk .)
+    MKDISK          reduce using rule 7 (commands -> command_fdisk .)
+    RMDISK          reduce using rule 7 (commands -> command_fdisk .)
+    FDISK           reduce using rule 7 (commands -> command_fdisk .)
+    MOUNT           reduce using rule 7 (commands -> command_fdisk .)
+    UNMOUNT         reduce using rule 7 (commands -> command_fdisk .)
+    MKFS            reduce using rule 7 (commands -> command_fdisk .)
+    PAUSE           reduce using rule 7 (commands -> command_fdisk .)
+    REP             reduce using rule 7 (commands -> command_fdisk .)
+    $end            reduce using rule 7 (commands -> command_fdisk .)
+
+
+state 8
+
+    (8) commands -> command_mount .
+
+    COMMENT         reduce using rule 8 (commands -> command_mount .)
+    EXECUTE         reduce using rule 8 (commands -> command_mount .)
+    MKDISK          reduce using rule 8 (commands -> command_mount .)
+    RMDISK          reduce using rule 8 (commands -> command_mount .)
+    FDISK           reduce using rule 8 (commands -> command_mount .)
+    MOUNT           reduce using rule 8 (commands -> command_mount .)
+    UNMOUNT         reduce using rule 8 (commands -> command_mount .)
+    MKFS            reduce using rule 8 (commands -> command_mount .)
+    PAUSE           reduce using rule 8 (commands -> command_mount .)
+    REP             reduce using rule 8 (commands -> command_mount .)
+    $end            reduce using rule 8 (commands -> command_mount .)
+
+
+state 9
+
+    (9) commands -> command_unmount .
+
+    COMMENT         reduce using rule 9 (commands -> command_unmount .)
+    EXECUTE         reduce using rule 9 (commands -> command_unmount .)
+    MKDISK          reduce using rule 9 (commands -> command_unmount .)
+    RMDISK          reduce using rule 9 (commands -> command_unmount .)
+    FDISK           reduce using rule 9 (commands -> command_unmount .)
+    MOUNT           reduce using rule 9 (commands -> command_unmount .)
+    UNMOUNT         reduce using rule 9 (commands -> command_unmount .)
+    MKFS            reduce using rule 9 (commands -> command_unmount .)
+    PAUSE           reduce using rule 9 (commands -> command_unmount .)
+    REP             reduce using rule 9 (commands -> command_unmount .)
+    $end            reduce using rule 9 (commands -> command_unmount .)
+
+
+state 10
+
+    (10) commands -> command_mkfs .
+
+    COMMENT         reduce using rule 10 (commands -> command_mkfs .)
+    EXECUTE         reduce using rule 10 (commands -> command_mkfs .)
+    MKDISK          reduce using rule 10 (commands -> command_mkfs .)
+    RMDISK          reduce using rule 10 (commands -> command_mkfs .)
+    FDISK           reduce using rule 10 (commands -> command_mkfs .)
+    MOUNT           reduce using rule 10 (commands -> command_mkfs .)
+    UNMOUNT         reduce using rule 10 (commands -> command_mkfs .)
+    MKFS            reduce using rule 10 (commands -> command_mkfs .)
+    PAUSE           reduce using rule 10 (commands -> command_mkfs .)
+    REP             reduce using rule 10 (commands -> command_mkfs .)
+    $end            reduce using rule 10 (commands -> command_mkfs .)
+
+
+state 11
+
+    (11) commands -> command_pause .
+
+    COMMENT         reduce using rule 11 (commands -> command_pause .)
+    EXECUTE         reduce using rule 11 (commands -> command_pause .)
+    MKDISK          reduce using rule 11 (commands -> command_pause .)
+    RMDISK          reduce using rule 11 (commands -> command_pause .)
+    FDISK           reduce using rule 11 (commands -> command_pause .)
+    MOUNT           reduce using rule 11 (commands -> command_pause .)
+    UNMOUNT         reduce using rule 11 (commands -> command_pause .)
+    MKFS            reduce using rule 11 (commands -> command_pause .)
+    PAUSE           reduce using rule 11 (commands -> command_pause .)
+    REP             reduce using rule 11 (commands -> command_pause .)
+    $end            reduce using rule 11 (commands -> command_pause .)
+
+
+state 12
+
+    (12) commands -> command_rep .
+
+    COMMENT         reduce using rule 12 (commands -> command_rep .)
+    EXECUTE         reduce using rule 12 (commands -> command_rep .)
+    MKDISK          reduce using rule 12 (commands -> command_rep .)
+    RMDISK          reduce using rule 12 (commands -> command_rep .)
+    FDISK           reduce using rule 12 (commands -> command_rep .)
+    MOUNT           reduce using rule 12 (commands -> command_rep .)
+    UNMOUNT         reduce using rule 12 (commands -> command_rep .)
+    MKFS            reduce using rule 12 (commands -> command_rep .)
+    PAUSE           reduce using rule 12 (commands -> command_rep .)
+    REP             reduce using rule 12 (commands -> command_rep .)
+    $end            reduce using rule 12 (commands -> command_rep .)
+
+
+state 13
+
+    (13) commands -> COMMENT .
+
+    COMMENT         reduce using rule 13 (commands -> COMMENT .)
+    EXECUTE         reduce using rule 13 (commands -> COMMENT .)
+    MKDISK          reduce using rule 13 (commands -> COMMENT .)
+    RMDISK          reduce using rule 13 (commands -> COMMENT .)
+    FDISK           reduce using rule 13 (commands -> COMMENT .)
+    MOUNT           reduce using rule 13 (commands -> COMMENT .)
+    UNMOUNT         reduce using rule 13 (commands -> COMMENT .)
+    MKFS            reduce using rule 13 (commands -> COMMENT .)
+    PAUSE           reduce using rule 13 (commands -> COMMENT .)
+    REP             reduce using rule 13 (commands -> COMMENT .)
+    $end            reduce using rule 13 (commands -> COMMENT .)
+
+
+state 14
+
+    (14) command_execute -> EXECUTE . GUION PATH IGUAL CADENA
+    (15) command_execute -> EXECUTE . GUION PATH IGUAL CADENA_SC
+
+    GUION           shift and go to state 24
+
+
+state 15
+
+    (16) command_mkdisk -> MKDISK . params_mkdisk
+    (17) params_mkdisk -> . params_mkdisk param_mkdisk
+    (18) params_mkdisk -> . param_mkdisk
+    (19) param_mkdisk -> . GUION PATH IGUAL CADENA
+    (20) param_mkdisk -> . GUION PATH IGUAL CADENA_SC
+    (21) param_mkdisk -> . GUION SIZE IGUAL ENTERO
+    (22) param_mkdisk -> . GUION UNIT IGUAL CADENA_SC
+    (23) param_mkdisk -> . GUION FIT IGUAL CADENA_SC
+
+    GUION           shift and go to state 27
+
+    params_mkdisk                  shift and go to state 25
+    param_mkdisk                   shift and go to state 26
+
+state 16
+
+    (24) command_rmdisk -> RMDISK . GUION PATH IGUAL CADENA
+    (25) command_rmdisk -> RMDISK . GUION PATH IGUAL CADENA_SC
+
+    GUION           shift and go to state 28
+
+
+state 17
+
+    (26) command_fdisk -> FDISK . params_fdisk
+    (27) params_fdisk -> . params_fdisk param_fdisk
+    (28) params_fdisk -> . param_fdisk
+    (29) param_fdisk -> . GUION PATH IGUAL CADENA
+    (30) param_fdisk -> . GUION PATH IGUAL CADENA_SC
+    (31) param_fdisk -> . GUION SIZE IGUAL ENTERO
+    (32) param_fdisk -> . GUION UNIT IGUAL CADENA_SC
+    (33) param_fdisk -> . GUION NAME IGUAL CADENA
+    (34) param_fdisk -> . GUION NAME IGUAL CADENA_SC
+    (35) param_fdisk -> . GUION TYPE IGUAL CADENA_SC
+    (36) param_fdisk -> . GUION FIT IGUAL CADENA_SC
+    (37) param_fdisk -> . GUION DELETE IGUAL CADENA_SC
+    (38) param_fdisk -> . GUION ADD IGUAL ENTERO
+
+    GUION           shift and go to state 31
+
+    params_fdisk                   shift and go to state 29
+    param_fdisk                    shift and go to state 30
+
+state 18
+
+    (39) command_mount -> MOUNT . params_mount
+    (40) params_mount -> . params_mount param_mount
+    (41) params_mount -> . param_mount
+    (42) param_mount -> . GUION PATH IGUAL CADENA
+    (43) param_mount -> . GUION PATH IGUAL CADENA_SC
+    (44) param_mount -> . GUION NAME IGUAL CADENA
+    (45) param_mount -> . GUION NAME IGUAL CADENA_SC
+
+    GUION           shift and go to state 34
+
+    params_mount                   shift and go to state 32
+    param_mount                    shift and go to state 33
+
+state 19
+
+    (46) command_unmount -> UNMOUNT . GUION ID IGUAL CADENA
+    (47) command_unmount -> UNMOUNT . GUION ID IGUAL CADENA_SC
+
+    GUION           shift and go to state 35
+
+
+state 20
+
+    (48) command_mkfs -> MKFS . params_mkfs
+    (49) params_mkfs -> . params_mkfs param_mkfs
+    (50) params_mkfs -> . param_mkfs
+    (51) param_mkfs -> . GUION ID IGUAL CADENA
+    (52) param_mkfs -> . GUION ID IGUAL CADENA_SC
+    (53) param_mkfs -> . GUION TYPE IGUAL CADENA_SC
+    (54) param_mkfs -> . GUION FS IGUAL CADENA_SC
+
+    GUION           shift and go to state 38
+
+    params_mkfs                    shift and go to state 36
+    param_mkfs                     shift and go to state 37
+
+state 21
+
+    (55) command_pause -> PAUSE .
+
+    COMMENT         reduce using rule 55 (command_pause -> PAUSE .)
+    EXECUTE         reduce using rule 55 (command_pause -> PAUSE .)
+    MKDISK          reduce using rule 55 (command_pause -> PAUSE .)
+    RMDISK          reduce using rule 55 (command_pause -> PAUSE .)
+    FDISK           reduce using rule 55 (command_pause -> PAUSE .)
+    MOUNT           reduce using rule 55 (command_pause -> PAUSE .)
+    UNMOUNT         reduce using rule 55 (command_pause -> PAUSE .)
+    MKFS            reduce using rule 55 (command_pause -> PAUSE .)
+    PAUSE           reduce using rule 55 (command_pause -> PAUSE .)
+    REP             reduce using rule 55 (command_pause -> PAUSE .)
+    $end            reduce using rule 55 (command_pause -> PAUSE .)
+
+
+state 22
+
+    (56) command_rep -> REP . params_rep
+    (57) params_rep -> . params_rep param_rep
+    (58) params_rep -> . param_rep
+    (59) param_rep -> . GUION NAME IGUAL CADENA_SC
+    (60) param_rep -> . GUION PATH IGUAL CADENA
+    (61) param_rep -> . GUION PATH IGUAL CADENA_SC
+    (62) param_rep -> . GUION ID IGUAL CADENA
+    (63) param_rep -> . GUION ID IGUAL CADENA_SC
+    (64) param_rep -> . GUION RUTA IGUAL CADENA
+    (65) param_rep -> . GUION RUTA IGUAL CADENA_SC
+
+    GUION           shift and go to state 41
+
+    params_rep                     shift and go to state 39
+    param_rep                      shift and go to state 40
+
+state 23
+
+    (2) list_commands -> list_commands commands .
+
+    COMMENT         reduce using rule 2 (list_commands -> list_commands commands .)
+    EXECUTE         reduce using rule 2 (list_commands -> list_commands commands .)
+    MKDISK          reduce using rule 2 (list_commands -> list_commands commands .)
+    RMDISK          reduce using rule 2 (list_commands -> list_commands commands .)
+    FDISK           reduce using rule 2 (list_commands -> list_commands commands .)
+    MOUNT           reduce using rule 2 (list_commands -> list_commands commands .)
+    UNMOUNT         reduce using rule 2 (list_commands -> list_commands commands .)
+    MKFS            reduce using rule 2 (list_commands -> list_commands commands .)
+    PAUSE           reduce using rule 2 (list_commands -> list_commands commands .)
+    REP             reduce using rule 2 (list_commands -> list_commands commands .)
+    $end            reduce using rule 2 (list_commands -> list_commands commands .)
+
+
+state 24
+
+    (14) command_execute -> EXECUTE GUION . PATH IGUAL CADENA
+    (15) command_execute -> EXECUTE GUION . PATH IGUAL CADENA_SC
+
+    PATH            shift and go to state 42
+
+
+state 25
+
+    (16) command_mkdisk -> MKDISK params_mkdisk .
+    (17) params_mkdisk -> params_mkdisk . param_mkdisk
+    (19) param_mkdisk -> . GUION PATH IGUAL CADENA
+    (20) param_mkdisk -> . GUION PATH IGUAL CADENA_SC
+    (21) param_mkdisk -> . GUION SIZE IGUAL ENTERO
+    (22) param_mkdisk -> . GUION UNIT IGUAL CADENA_SC
+    (23) param_mkdisk -> . GUION FIT IGUAL CADENA_SC
+
+    COMMENT         reduce using rule 16 (command_mkdisk -> MKDISK params_mkdisk .)
+    EXECUTE         reduce using rule 16 (command_mkdisk -> MKDISK params_mkdisk .)
+    MKDISK          reduce using rule 16 (command_mkdisk -> MKDISK params_mkdisk .)
+    RMDISK          reduce using rule 16 (command_mkdisk -> MKDISK params_mkdisk .)
+    FDISK           reduce using rule 16 (command_mkdisk -> MKDISK params_mkdisk .)
+    MOUNT           reduce using rule 16 (command_mkdisk -> MKDISK params_mkdisk .)
+    UNMOUNT         reduce using rule 16 (command_mkdisk -> MKDISK params_mkdisk .)
+    MKFS            reduce using rule 16 (command_mkdisk -> MKDISK params_mkdisk .)
+    PAUSE           reduce using rule 16 (command_mkdisk -> MKDISK params_mkdisk .)
+    REP             reduce using rule 16 (command_mkdisk -> MKDISK params_mkdisk .)
+    $end            reduce using rule 16 (command_mkdisk -> MKDISK params_mkdisk .)
+    GUION           shift and go to state 27
+
+    param_mkdisk                   shift and go to state 43
+
+state 26
+
+    (18) params_mkdisk -> param_mkdisk .
+
+    GUION           reduce using rule 18 (params_mkdisk -> param_mkdisk .)
+    COMMENT         reduce using rule 18 (params_mkdisk -> param_mkdisk .)
+    EXECUTE         reduce using rule 18 (params_mkdisk -> param_mkdisk .)
+    MKDISK          reduce using rule 18 (params_mkdisk -> param_mkdisk .)
+    RMDISK          reduce using rule 18 (params_mkdisk -> param_mkdisk .)
+    FDISK           reduce using rule 18 (params_mkdisk -> param_mkdisk .)
+    MOUNT           reduce using rule 18 (params_mkdisk -> param_mkdisk .)
+    UNMOUNT         reduce using rule 18 (params_mkdisk -> param_mkdisk .)
+    MKFS            reduce using rule 18 (params_mkdisk -> param_mkdisk .)
+    PAUSE           reduce using rule 18 (params_mkdisk -> param_mkdisk .)
+    REP             reduce using rule 18 (params_mkdisk -> param_mkdisk .)
+    $end            reduce using rule 18 (params_mkdisk -> param_mkdisk .)
+
+
+state 27
+
+    (19) param_mkdisk -> GUION . PATH IGUAL CADENA
+    (20) param_mkdisk -> GUION . PATH IGUAL CADENA_SC
+    (21) param_mkdisk -> GUION . SIZE IGUAL ENTERO
+    (22) param_mkdisk -> GUION . UNIT IGUAL CADENA_SC
+    (23) param_mkdisk -> GUION . FIT IGUAL CADENA_SC
+
+    PATH            shift and go to state 44
+    SIZE            shift and go to state 45
+    UNIT            shift and go to state 46
+    FIT             shift and go to state 47
+
+
+state 28
+
+    (24) command_rmdisk -> RMDISK GUION . PATH IGUAL CADENA
+    (25) command_rmdisk -> RMDISK GUION . PATH IGUAL CADENA_SC
+
+    PATH            shift and go to state 48
+
+
+state 29
+
+    (26) command_fdisk -> FDISK params_fdisk .
+    (27) params_fdisk -> params_fdisk . param_fdisk
+    (29) param_fdisk -> . GUION PATH IGUAL CADENA
+    (30) param_fdisk -> . GUION PATH IGUAL CADENA_SC
+    (31) param_fdisk -> . GUION SIZE IGUAL ENTERO
+    (32) param_fdisk -> . GUION UNIT IGUAL CADENA_SC
+    (33) param_fdisk -> . GUION NAME IGUAL CADENA
+    (34) param_fdisk -> . GUION NAME IGUAL CADENA_SC
+    (35) param_fdisk -> . GUION TYPE IGUAL CADENA_SC
+    (36) param_fdisk -> . GUION FIT IGUAL CADENA_SC
+    (37) param_fdisk -> . GUION DELETE IGUAL CADENA_SC
+    (38) param_fdisk -> . GUION ADD IGUAL ENTERO
+
+    COMMENT         reduce using rule 26 (command_fdisk -> FDISK params_fdisk .)
+    EXECUTE         reduce using rule 26 (command_fdisk -> FDISK params_fdisk .)
+    MKDISK          reduce using rule 26 (command_fdisk -> FDISK params_fdisk .)
+    RMDISK          reduce using rule 26 (command_fdisk -> FDISK params_fdisk .)
+    FDISK           reduce using rule 26 (command_fdisk -> FDISK params_fdisk .)
+    MOUNT           reduce using rule 26 (command_fdisk -> FDISK params_fdisk .)
+    UNMOUNT         reduce using rule 26 (command_fdisk -> FDISK params_fdisk .)
+    MKFS            reduce using rule 26 (command_fdisk -> FDISK params_fdisk .)
+    PAUSE           reduce using rule 26 (command_fdisk -> FDISK params_fdisk .)
+    REP             reduce using rule 26 (command_fdisk -> FDISK params_fdisk .)
+    $end            reduce using rule 26 (command_fdisk -> FDISK params_fdisk .)
+    GUION           shift and go to state 31
+
+    param_fdisk                    shift and go to state 49
+
+state 30
+
+    (28) params_fdisk -> param_fdisk .
+
+    GUION           reduce using rule 28 (params_fdisk -> param_fdisk .)
+    COMMENT         reduce using rule 28 (params_fdisk -> param_fdisk .)
+    EXECUTE         reduce using rule 28 (params_fdisk -> param_fdisk .)
+    MKDISK          reduce using rule 28 (params_fdisk -> param_fdisk .)
+    RMDISK          reduce using rule 28 (params_fdisk -> param_fdisk .)
+    FDISK           reduce using rule 28 (params_fdisk -> param_fdisk .)
+    MOUNT           reduce using rule 28 (params_fdisk -> param_fdisk .)
+    UNMOUNT         reduce using rule 28 (params_fdisk -> param_fdisk .)
+    MKFS            reduce using rule 28 (params_fdisk -> param_fdisk .)
+    PAUSE           reduce using rule 28 (params_fdisk -> param_fdisk .)
+    REP             reduce using rule 28 (params_fdisk -> param_fdisk .)
+    $end            reduce using rule 28 (params_fdisk -> param_fdisk .)
+
+
+state 31
+
+    (29) param_fdisk -> GUION . PATH IGUAL CADENA
+    (30) param_fdisk -> GUION . PATH IGUAL CADENA_SC
+    (31) param_fdisk -> GUION . SIZE IGUAL ENTERO
+    (32) param_fdisk -> GUION . UNIT IGUAL CADENA_SC
+    (33) param_fdisk -> GUION . NAME IGUAL CADENA
+    (34) param_fdisk -> GUION . NAME IGUAL CADENA_SC
+    (35) param_fdisk -> GUION . TYPE IGUAL CADENA_SC
+    (36) param_fdisk -> GUION . FIT IGUAL CADENA_SC
+    (37) param_fdisk -> GUION . DELETE IGUAL CADENA_SC
+    (38) param_fdisk -> GUION . ADD IGUAL ENTERO
+
+    PATH            shift and go to state 50
+    SIZE            shift and go to state 51
+    UNIT            shift and go to state 52
+    NAME            shift and go to state 53
+    TYPE            shift and go to state 54
+    FIT             shift and go to state 55
+    DELETE          shift and go to state 56
+    ADD             shift and go to state 57
+
+
+state 32
+
+    (39) command_mount -> MOUNT params_mount .
+    (40) params_mount -> params_mount . param_mount
+    (42) param_mount -> . GUION PATH IGUAL CADENA
+    (43) param_mount -> . GUION PATH IGUAL CADENA_SC
+    (44) param_mount -> . GUION NAME IGUAL CADENA
+    (45) param_mount -> . GUION NAME IGUAL CADENA_SC
+
+    COMMENT         reduce using rule 39 (command_mount -> MOUNT params_mount .)
+    EXECUTE         reduce using rule 39 (command_mount -> MOUNT params_mount .)
+    MKDISK          reduce using rule 39 (command_mount -> MOUNT params_mount .)
+    RMDISK          reduce using rule 39 (command_mount -> MOUNT params_mount .)
+    FDISK           reduce using rule 39 (command_mount -> MOUNT params_mount .)
+    MOUNT           reduce using rule 39 (command_mount -> MOUNT params_mount .)
+    UNMOUNT         reduce using rule 39 (command_mount -> MOUNT params_mount .)
+    MKFS            reduce using rule 39 (command_mount -> MOUNT params_mount .)
+    PAUSE           reduce using rule 39 (command_mount -> MOUNT params_mount .)
+    REP             reduce using rule 39 (command_mount -> MOUNT params_mount .)
+    $end            reduce using rule 39 (command_mount -> MOUNT params_mount .)
+    GUION           shift and go to state 34
+
+    param_mount                    shift and go to state 58
+
+state 33
+
+    (41) params_mount -> param_mount .
+
+    GUION           reduce using rule 41 (params_mount -> param_mount .)
+    COMMENT         reduce using rule 41 (params_mount -> param_mount .)
+    EXECUTE         reduce using rule 41 (params_mount -> param_mount .)
+    MKDISK          reduce using rule 41 (params_mount -> param_mount .)
+    RMDISK          reduce using rule 41 (params_mount -> param_mount .)
+    FDISK           reduce using rule 41 (params_mount -> param_mount .)
+    MOUNT           reduce using rule 41 (params_mount -> param_mount .)
+    UNMOUNT         reduce using rule 41 (params_mount -> param_mount .)
+    MKFS            reduce using rule 41 (params_mount -> param_mount .)
+    PAUSE           reduce using rule 41 (params_mount -> param_mount .)
+    REP             reduce using rule 41 (params_mount -> param_mount .)
+    $end            reduce using rule 41 (params_mount -> param_mount .)
+
+
+state 34
+
+    (42) param_mount -> GUION . PATH IGUAL CADENA
+    (43) param_mount -> GUION . PATH IGUAL CADENA_SC
+    (44) param_mount -> GUION . NAME IGUAL CADENA
+    (45) param_mount -> GUION . NAME IGUAL CADENA_SC
+
+    PATH            shift and go to state 59
+    NAME            shift and go to state 60
+
+
+state 35
+
+    (46) command_unmount -> UNMOUNT GUION . ID IGUAL CADENA
+    (47) command_unmount -> UNMOUNT GUION . ID IGUAL CADENA_SC
+
+    ID              shift and go to state 61
+
+
+state 36
+
+    (48) command_mkfs -> MKFS params_mkfs .
+    (49) params_mkfs -> params_mkfs . param_mkfs
+    (51) param_mkfs -> . GUION ID IGUAL CADENA
+    (52) param_mkfs -> . GUION ID IGUAL CADENA_SC
+    (53) param_mkfs -> . GUION TYPE IGUAL CADENA_SC
+    (54) param_mkfs -> . GUION FS IGUAL CADENA_SC
+
+    COMMENT         reduce using rule 48 (command_mkfs -> MKFS params_mkfs .)
+    EXECUTE         reduce using rule 48 (command_mkfs -> MKFS params_mkfs .)
+    MKDISK          reduce using rule 48 (command_mkfs -> MKFS params_mkfs .)
+    RMDISK          reduce using rule 48 (command_mkfs -> MKFS params_mkfs .)
+    FDISK           reduce using rule 48 (command_mkfs -> MKFS params_mkfs .)
+    MOUNT           reduce using rule 48 (command_mkfs -> MKFS params_mkfs .)
+    UNMOUNT         reduce using rule 48 (command_mkfs -> MKFS params_mkfs .)
+    MKFS            reduce using rule 48 (command_mkfs -> MKFS params_mkfs .)
+    PAUSE           reduce using rule 48 (command_mkfs -> MKFS params_mkfs .)
+    REP             reduce using rule 48 (command_mkfs -> MKFS params_mkfs .)
+    $end            reduce using rule 48 (command_mkfs -> MKFS params_mkfs .)
+    GUION           shift and go to state 38
+
+    param_mkfs                     shift and go to state 62
+
+state 37
+
+    (50) params_mkfs -> param_mkfs .
+
+    GUION           reduce using rule 50 (params_mkfs -> param_mkfs .)
+    COMMENT         reduce using rule 50 (params_mkfs -> param_mkfs .)
+    EXECUTE         reduce using rule 50 (params_mkfs -> param_mkfs .)
+    MKDISK          reduce using rule 50 (params_mkfs -> param_mkfs .)
+    RMDISK          reduce using rule 50 (params_mkfs -> param_mkfs .)
+    FDISK           reduce using rule 50 (params_mkfs -> param_mkfs .)
+    MOUNT           reduce using rule 50 (params_mkfs -> param_mkfs .)
+    UNMOUNT         reduce using rule 50 (params_mkfs -> param_mkfs .)
+    MKFS            reduce using rule 50 (params_mkfs -> param_mkfs .)
+    PAUSE           reduce using rule 50 (params_mkfs -> param_mkfs .)
+    REP             reduce using rule 50 (params_mkfs -> param_mkfs .)
+    $end            reduce using rule 50 (params_mkfs -> param_mkfs .)
+
+
+state 38
+
+    (51) param_mkfs -> GUION . ID IGUAL CADENA
+    (52) param_mkfs -> GUION . ID IGUAL CADENA_SC
+    (53) param_mkfs -> GUION . TYPE IGUAL CADENA_SC
+    (54) param_mkfs -> GUION . FS IGUAL CADENA_SC
+
+    ID              shift and go to state 63
+    TYPE            shift and go to state 64
+    FS              shift and go to state 65
+
+
+state 39
+
+    (56) command_rep -> REP params_rep .
+    (57) params_rep -> params_rep . param_rep
+    (59) param_rep -> . GUION NAME IGUAL CADENA_SC
+    (60) param_rep -> . GUION PATH IGUAL CADENA
+    (61) param_rep -> . GUION PATH IGUAL CADENA_SC
+    (62) param_rep -> . GUION ID IGUAL CADENA
+    (63) param_rep -> . GUION ID IGUAL CADENA_SC
+    (64) param_rep -> . GUION RUTA IGUAL CADENA
+    (65) param_rep -> . GUION RUTA IGUAL CADENA_SC
+
+    COMMENT         reduce using rule 56 (command_rep -> REP params_rep .)
+    EXECUTE         reduce using rule 56 (command_rep -> REP params_rep .)
+    MKDISK          reduce using rule 56 (command_rep -> REP params_rep .)
+    RMDISK          reduce using rule 56 (command_rep -> REP params_rep .)
+    FDISK           reduce using rule 56 (command_rep -> REP params_rep .)
+    MOUNT           reduce using rule 56 (command_rep -> REP params_rep .)
+    UNMOUNT         reduce using rule 56 (command_rep -> REP params_rep .)
+    MKFS            reduce using rule 56 (command_rep -> REP params_rep .)
+    PAUSE           reduce using rule 56 (command_rep -> REP params_rep .)
+    REP             reduce using rule 56 (command_rep -> REP params_rep .)
+    $end            reduce using rule 56 (command_rep -> REP params_rep .)
+    GUION           shift and go to state 41
+
+    param_rep                      shift and go to state 66
+
+state 40
+
+    (58) params_rep -> param_rep .
+
+    GUION           reduce using rule 58 (params_rep -> param_rep .)
+    COMMENT         reduce using rule 58 (params_rep -> param_rep .)
+    EXECUTE         reduce using rule 58 (params_rep -> param_rep .)
+    MKDISK          reduce using rule 58 (params_rep -> param_rep .)
+    RMDISK          reduce using rule 58 (params_rep -> param_rep .)
+    FDISK           reduce using rule 58 (params_rep -> param_rep .)
+    MOUNT           reduce using rule 58 (params_rep -> param_rep .)
+    UNMOUNT         reduce using rule 58 (params_rep -> param_rep .)
+    MKFS            reduce using rule 58 (params_rep -> param_rep .)
+    PAUSE           reduce using rule 58 (params_rep -> param_rep .)
+    REP             reduce using rule 58 (params_rep -> param_rep .)
+    $end            reduce using rule 58 (params_rep -> param_rep .)
+
+
+state 41
+
+    (59) param_rep -> GUION . NAME IGUAL CADENA_SC
+    (60) param_rep -> GUION . PATH IGUAL CADENA
+    (61) param_rep -> GUION . PATH IGUAL CADENA_SC
+    (62) param_rep -> GUION . ID IGUAL CADENA
+    (63) param_rep -> GUION . ID IGUAL CADENA_SC
+    (64) param_rep -> GUION . RUTA IGUAL CADENA
+    (65) param_rep -> GUION . RUTA IGUAL CADENA_SC
+
+    NAME            shift and go to state 67
+    PATH            shift and go to state 68
+    ID              shift and go to state 69
+    RUTA            shift and go to state 70
+
+
+state 42
+
+    (14) command_execute -> EXECUTE GUION PATH . IGUAL CADENA
+    (15) command_execute -> EXECUTE GUION PATH . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 71
+
+
+state 43
+
+    (17) params_mkdisk -> params_mkdisk param_mkdisk .
+
+    GUION           reduce using rule 17 (params_mkdisk -> params_mkdisk param_mkdisk .)
+    COMMENT         reduce using rule 17 (params_mkdisk -> params_mkdisk param_mkdisk .)
+    EXECUTE         reduce using rule 17 (params_mkdisk -> params_mkdisk param_mkdisk .)
+    MKDISK          reduce using rule 17 (params_mkdisk -> params_mkdisk param_mkdisk .)
+    RMDISK          reduce using rule 17 (params_mkdisk -> params_mkdisk param_mkdisk .)
+    FDISK           reduce using rule 17 (params_mkdisk -> params_mkdisk param_mkdisk .)
+    MOUNT           reduce using rule 17 (params_mkdisk -> params_mkdisk param_mkdisk .)
+    UNMOUNT         reduce using rule 17 (params_mkdisk -> params_mkdisk param_mkdisk .)
+    MKFS            reduce using rule 17 (params_mkdisk -> params_mkdisk param_mkdisk .)
+    PAUSE           reduce using rule 17 (params_mkdisk -> params_mkdisk param_mkdisk .)
+    REP             reduce using rule 17 (params_mkdisk -> params_mkdisk param_mkdisk .)
+    $end            reduce using rule 17 (params_mkdisk -> params_mkdisk param_mkdisk .)
+
+
+state 44
+
+    (19) param_mkdisk -> GUION PATH . IGUAL CADENA
+    (20) param_mkdisk -> GUION PATH . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 72
+
+
+state 45
+
+    (21) param_mkdisk -> GUION SIZE . IGUAL ENTERO
+
+    IGUAL           shift and go to state 73
+
+
+state 46
+
+    (22) param_mkdisk -> GUION UNIT . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 74
+
+
+state 47
+
+    (23) param_mkdisk -> GUION FIT . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 75
+
+
+state 48
+
+    (24) command_rmdisk -> RMDISK GUION PATH . IGUAL CADENA
+    (25) command_rmdisk -> RMDISK GUION PATH . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 76
+
+
+state 49
+
+    (27) params_fdisk -> params_fdisk param_fdisk .
+
+    GUION           reduce using rule 27 (params_fdisk -> params_fdisk param_fdisk .)
+    COMMENT         reduce using rule 27 (params_fdisk -> params_fdisk param_fdisk .)
+    EXECUTE         reduce using rule 27 (params_fdisk -> params_fdisk param_fdisk .)
+    MKDISK          reduce using rule 27 (params_fdisk -> params_fdisk param_fdisk .)
+    RMDISK          reduce using rule 27 (params_fdisk -> params_fdisk param_fdisk .)
+    FDISK           reduce using rule 27 (params_fdisk -> params_fdisk param_fdisk .)
+    MOUNT           reduce using rule 27 (params_fdisk -> params_fdisk param_fdisk .)
+    UNMOUNT         reduce using rule 27 (params_fdisk -> params_fdisk param_fdisk .)
+    MKFS            reduce using rule 27 (params_fdisk -> params_fdisk param_fdisk .)
+    PAUSE           reduce using rule 27 (params_fdisk -> params_fdisk param_fdisk .)
+    REP             reduce using rule 27 (params_fdisk -> params_fdisk param_fdisk .)
+    $end            reduce using rule 27 (params_fdisk -> params_fdisk param_fdisk .)
+
+
+state 50
+
+    (29) param_fdisk -> GUION PATH . IGUAL CADENA
+    (30) param_fdisk -> GUION PATH . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 77
+
+
+state 51
+
+    (31) param_fdisk -> GUION SIZE . IGUAL ENTERO
+
+    IGUAL           shift and go to state 78
+
+
+state 52
+
+    (32) param_fdisk -> GUION UNIT . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 79
+
+
+state 53
+
+    (33) param_fdisk -> GUION NAME . IGUAL CADENA
+    (34) param_fdisk -> GUION NAME . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 80
+
+
+state 54
+
+    (35) param_fdisk -> GUION TYPE . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 81
+
+
+state 55
+
+    (36) param_fdisk -> GUION FIT . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 82
+
+
+state 56
+
+    (37) param_fdisk -> GUION DELETE . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 83
+
+
+state 57
+
+    (38) param_fdisk -> GUION ADD . IGUAL ENTERO
+
+    IGUAL           shift and go to state 84
+
+
+state 58
+
+    (40) params_mount -> params_mount param_mount .
+
+    GUION           reduce using rule 40 (params_mount -> params_mount param_mount .)
+    COMMENT         reduce using rule 40 (params_mount -> params_mount param_mount .)
+    EXECUTE         reduce using rule 40 (params_mount -> params_mount param_mount .)
+    MKDISK          reduce using rule 40 (params_mount -> params_mount param_mount .)
+    RMDISK          reduce using rule 40 (params_mount -> params_mount param_mount .)
+    FDISK           reduce using rule 40 (params_mount -> params_mount param_mount .)
+    MOUNT           reduce using rule 40 (params_mount -> params_mount param_mount .)
+    UNMOUNT         reduce using rule 40 (params_mount -> params_mount param_mount .)
+    MKFS            reduce using rule 40 (params_mount -> params_mount param_mount .)
+    PAUSE           reduce using rule 40 (params_mount -> params_mount param_mount .)
+    REP             reduce using rule 40 (params_mount -> params_mount param_mount .)
+    $end            reduce using rule 40 (params_mount -> params_mount param_mount .)
+
+
+state 59
+
+    (42) param_mount -> GUION PATH . IGUAL CADENA
+    (43) param_mount -> GUION PATH . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 85
+
+
+state 60
+
+    (44) param_mount -> GUION NAME . IGUAL CADENA
+    (45) param_mount -> GUION NAME . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 86
+
+
+state 61
+
+    (46) command_unmount -> UNMOUNT GUION ID . IGUAL CADENA
+    (47) command_unmount -> UNMOUNT GUION ID . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 87
+
+
+state 62
+
+    (49) params_mkfs -> params_mkfs param_mkfs .
+
+    GUION           reduce using rule 49 (params_mkfs -> params_mkfs param_mkfs .)
+    COMMENT         reduce using rule 49 (params_mkfs -> params_mkfs param_mkfs .)
+    EXECUTE         reduce using rule 49 (params_mkfs -> params_mkfs param_mkfs .)
+    MKDISK          reduce using rule 49 (params_mkfs -> params_mkfs param_mkfs .)
+    RMDISK          reduce using rule 49 (params_mkfs -> params_mkfs param_mkfs .)
+    FDISK           reduce using rule 49 (params_mkfs -> params_mkfs param_mkfs .)
+    MOUNT           reduce using rule 49 (params_mkfs -> params_mkfs param_mkfs .)
+    UNMOUNT         reduce using rule 49 (params_mkfs -> params_mkfs param_mkfs .)
+    MKFS            reduce using rule 49 (params_mkfs -> params_mkfs param_mkfs .)
+    PAUSE           reduce using rule 49 (params_mkfs -> params_mkfs param_mkfs .)
+    REP             reduce using rule 49 (params_mkfs -> params_mkfs param_mkfs .)
+    $end            reduce using rule 49 (params_mkfs -> params_mkfs param_mkfs .)
+
+
+state 63
+
+    (51) param_mkfs -> GUION ID . IGUAL CADENA
+    (52) param_mkfs -> GUION ID . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 88
+
+
+state 64
+
+    (53) param_mkfs -> GUION TYPE . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 89
+
+
+state 65
+
+    (54) param_mkfs -> GUION FS . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 90
+
+
+state 66
+
+    (57) params_rep -> params_rep param_rep .
+
+    GUION           reduce using rule 57 (params_rep -> params_rep param_rep .)
+    COMMENT         reduce using rule 57 (params_rep -> params_rep param_rep .)
+    EXECUTE         reduce using rule 57 (params_rep -> params_rep param_rep .)
+    MKDISK          reduce using rule 57 (params_rep -> params_rep param_rep .)
+    RMDISK          reduce using rule 57 (params_rep -> params_rep param_rep .)
+    FDISK           reduce using rule 57 (params_rep -> params_rep param_rep .)
+    MOUNT           reduce using rule 57 (params_rep -> params_rep param_rep .)
+    UNMOUNT         reduce using rule 57 (params_rep -> params_rep param_rep .)
+    MKFS            reduce using rule 57 (params_rep -> params_rep param_rep .)
+    PAUSE           reduce using rule 57 (params_rep -> params_rep param_rep .)
+    REP             reduce using rule 57 (params_rep -> params_rep param_rep .)
+    $end            reduce using rule 57 (params_rep -> params_rep param_rep .)
+
+
+state 67
+
+    (59) param_rep -> GUION NAME . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 91
+
+
+state 68
+
+    (60) param_rep -> GUION PATH . IGUAL CADENA
+    (61) param_rep -> GUION PATH . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 92
+
+
+state 69
+
+    (62) param_rep -> GUION ID . IGUAL CADENA
+    (63) param_rep -> GUION ID . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 93
+
+
+state 70
+
+    (64) param_rep -> GUION RUTA . IGUAL CADENA
+    (65) param_rep -> GUION RUTA . IGUAL CADENA_SC
+
+    IGUAL           shift and go to state 94
+
+
+state 71
+
+    (14) command_execute -> EXECUTE GUION PATH IGUAL . CADENA
+    (15) command_execute -> EXECUTE GUION PATH IGUAL . CADENA_SC
+
+    CADENA          shift and go to state 95
+    CADENA_SC       shift and go to state 96
+
+
+state 72
+
+    (19) param_mkdisk -> GUION PATH IGUAL . CADENA
+    (20) param_mkdisk -> GUION PATH IGUAL . CADENA_SC
+
+    CADENA          shift and go to state 97
+    CADENA_SC       shift and go to state 98
+
+
+state 73
+
+    (21) param_mkdisk -> GUION SIZE IGUAL . ENTERO
+
+    ENTERO          shift and go to state 99
+
+
+state 74
+
+    (22) param_mkdisk -> GUION UNIT IGUAL . CADENA_SC
+
+    CADENA_SC       shift and go to state 100
+
+
+state 75
+
+    (23) param_mkdisk -> GUION FIT IGUAL . CADENA_SC
+
+    CADENA_SC       shift and go to state 101
+
+
+state 76
+
+    (24) command_rmdisk -> RMDISK GUION PATH IGUAL . CADENA
+    (25) command_rmdisk -> RMDISK GUION PATH IGUAL . CADENA_SC
+
+    CADENA          shift and go to state 102
+    CADENA_SC       shift and go to state 103
+
+
+state 77
+
+    (29) param_fdisk -> GUION PATH IGUAL . CADENA
+    (30) param_fdisk -> GUION PATH IGUAL . CADENA_SC
+
+    CADENA          shift and go to state 104
+    CADENA_SC       shift and go to state 105
+
+
+state 78
+
+    (31) param_fdisk -> GUION SIZE IGUAL . ENTERO
+
+    ENTERO          shift and go to state 106
+
+
+state 79
+
+    (32) param_fdisk -> GUION UNIT IGUAL . CADENA_SC
+
+    CADENA_SC       shift and go to state 107
+
+
+state 80
+
+    (33) param_fdisk -> GUION NAME IGUAL . CADENA
+    (34) param_fdisk -> GUION NAME IGUAL . CADENA_SC
+
+    CADENA          shift and go to state 108
+    CADENA_SC       shift and go to state 109
+
+
+state 81
+
+    (35) param_fdisk -> GUION TYPE IGUAL . CADENA_SC
+
+    CADENA_SC       shift and go to state 110
+
+
+state 82
+
+    (36) param_fdisk -> GUION FIT IGUAL . CADENA_SC
+
+    CADENA_SC       shift and go to state 111
+
+
+state 83
+
+    (37) param_fdisk -> GUION DELETE IGUAL . CADENA_SC
+
+    CADENA_SC       shift and go to state 112
+
+
+state 84
+
+    (38) param_fdisk -> GUION ADD IGUAL . ENTERO
+
+    ENTERO          shift and go to state 113
+
+
+state 85
+
+    (42) param_mount -> GUION PATH IGUAL . CADENA
+    (43) param_mount -> GUION PATH IGUAL . CADENA_SC
+
+    CADENA          shift and go to state 114
+    CADENA_SC       shift and go to state 115
+
+
+state 86
+
+    (44) param_mount -> GUION NAME IGUAL . CADENA
+    (45) param_mount -> GUION NAME IGUAL . CADENA_SC
+
+    CADENA          shift and go to state 116
+    CADENA_SC       shift and go to state 117
+
+
+state 87
+
+    (46) command_unmount -> UNMOUNT GUION ID IGUAL . CADENA
+    (47) command_unmount -> UNMOUNT GUION ID IGUAL . CADENA_SC
+
+    CADENA          shift and go to state 118
+    CADENA_SC       shift and go to state 119
+
+
+state 88
+
+    (51) param_mkfs -> GUION ID IGUAL . CADENA
+    (52) param_mkfs -> GUION ID IGUAL . CADENA_SC
+
+    CADENA          shift and go to state 120
+    CADENA_SC       shift and go to state 121
+
+
+state 89
+
+    (53) param_mkfs -> GUION TYPE IGUAL . CADENA_SC
+
+    CADENA_SC       shift and go to state 122
+
+
+state 90
+
+    (54) param_mkfs -> GUION FS IGUAL . CADENA_SC
+
+    CADENA_SC       shift and go to state 123
+
+
+state 91
+
+    (59) param_rep -> GUION NAME IGUAL . CADENA_SC
+
+    CADENA_SC       shift and go to state 124
+
+
+state 92
+
+    (60) param_rep -> GUION PATH IGUAL . CADENA
+    (61) param_rep -> GUION PATH IGUAL . CADENA_SC
+
+    CADENA          shift and go to state 125
+    CADENA_SC       shift and go to state 126
+
+
+state 93
+
+    (62) param_rep -> GUION ID IGUAL . CADENA
+    (63) param_rep -> GUION ID IGUAL . CADENA_SC
+
+    CADENA          shift and go to state 127
+    CADENA_SC       shift and go to state 128
+
+
+state 94
+
+    (64) param_rep -> GUION RUTA IGUAL . CADENA
+    (65) param_rep -> GUION RUTA IGUAL . CADENA_SC
+
+    CADENA          shift and go to state 129
+    CADENA_SC       shift and go to state 130
+
+
+state 95
+
+    (14) command_execute -> EXECUTE GUION PATH IGUAL CADENA .
+
+    COMMENT         reduce using rule 14 (command_execute -> EXECUTE GUION PATH IGUAL CADENA .)
+    EXECUTE         reduce using rule 14 (command_execute -> EXECUTE GUION PATH IGUAL CADENA .)
+    MKDISK          reduce using rule 14 (command_execute -> EXECUTE GUION PATH IGUAL CADENA .)
+    RMDISK          reduce using rule 14 (command_execute -> EXECUTE GUION PATH IGUAL CADENA .)
+    FDISK           reduce using rule 14 (command_execute -> EXECUTE GUION PATH IGUAL CADENA .)
+    MOUNT           reduce using rule 14 (command_execute -> EXECUTE GUION PATH IGUAL CADENA .)
+    UNMOUNT         reduce using rule 14 (command_execute -> EXECUTE GUION PATH IGUAL CADENA .)
+    MKFS            reduce using rule 14 (command_execute -> EXECUTE GUION PATH IGUAL CADENA .)
+    PAUSE           reduce using rule 14 (command_execute -> EXECUTE GUION PATH IGUAL CADENA .)
+    REP             reduce using rule 14 (command_execute -> EXECUTE GUION PATH IGUAL CADENA .)
+    $end            reduce using rule 14 (command_execute -> EXECUTE GUION PATH IGUAL CADENA .)
+
+
+state 96
+
+    (15) command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC .
+
+    COMMENT         reduce using rule 15 (command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 15 (command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 15 (command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 15 (command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC .)
+    FDISK           reduce using rule 15 (command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 15 (command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 15 (command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC .)
+    MKFS            reduce using rule 15 (command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 15 (command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC .)
+    REP             reduce using rule 15 (command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC .)
+    $end            reduce using rule 15 (command_execute -> EXECUTE GUION PATH IGUAL CADENA_SC .)
+
+
+state 97
+
+    (19) param_mkdisk -> GUION PATH IGUAL CADENA .
+
+    GUION           reduce using rule 19 (param_mkdisk -> GUION PATH IGUAL CADENA .)
+    COMMENT         reduce using rule 19 (param_mkdisk -> GUION PATH IGUAL CADENA .)
+    EXECUTE         reduce using rule 19 (param_mkdisk -> GUION PATH IGUAL CADENA .)
+    MKDISK          reduce using rule 19 (param_mkdisk -> GUION PATH IGUAL CADENA .)
+    RMDISK          reduce using rule 19 (param_mkdisk -> GUION PATH IGUAL CADENA .)
+    FDISK           reduce using rule 19 (param_mkdisk -> GUION PATH IGUAL CADENA .)
+    MOUNT           reduce using rule 19 (param_mkdisk -> GUION PATH IGUAL CADENA .)
+    UNMOUNT         reduce using rule 19 (param_mkdisk -> GUION PATH IGUAL CADENA .)
+    MKFS            reduce using rule 19 (param_mkdisk -> GUION PATH IGUAL CADENA .)
+    PAUSE           reduce using rule 19 (param_mkdisk -> GUION PATH IGUAL CADENA .)
+    REP             reduce using rule 19 (param_mkdisk -> GUION PATH IGUAL CADENA .)
+    $end            reduce using rule 19 (param_mkdisk -> GUION PATH IGUAL CADENA .)
+
+
+state 98
+
+    (20) param_mkdisk -> GUION PATH IGUAL CADENA_SC .
+
+    GUION           reduce using rule 20 (param_mkdisk -> GUION PATH IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 20 (param_mkdisk -> GUION PATH IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 20 (param_mkdisk -> GUION PATH IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 20 (param_mkdisk -> GUION PATH IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 20 (param_mkdisk -> GUION PATH IGUAL CADENA_SC .)
+    FDISK           reduce using rule 20 (param_mkdisk -> GUION PATH IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 20 (param_mkdisk -> GUION PATH IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 20 (param_mkdisk -> GUION PATH IGUAL CADENA_SC .)
+    MKFS            reduce using rule 20 (param_mkdisk -> GUION PATH IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 20 (param_mkdisk -> GUION PATH IGUAL CADENA_SC .)
+    REP             reduce using rule 20 (param_mkdisk -> GUION PATH IGUAL CADENA_SC .)
+    $end            reduce using rule 20 (param_mkdisk -> GUION PATH IGUAL CADENA_SC .)
+
+
+state 99
+
+    (21) param_mkdisk -> GUION SIZE IGUAL ENTERO .
+
+    GUION           reduce using rule 21 (param_mkdisk -> GUION SIZE IGUAL ENTERO .)
+    COMMENT         reduce using rule 21 (param_mkdisk -> GUION SIZE IGUAL ENTERO .)
+    EXECUTE         reduce using rule 21 (param_mkdisk -> GUION SIZE IGUAL ENTERO .)
+    MKDISK          reduce using rule 21 (param_mkdisk -> GUION SIZE IGUAL ENTERO .)
+    RMDISK          reduce using rule 21 (param_mkdisk -> GUION SIZE IGUAL ENTERO .)
+    FDISK           reduce using rule 21 (param_mkdisk -> GUION SIZE IGUAL ENTERO .)
+    MOUNT           reduce using rule 21 (param_mkdisk -> GUION SIZE IGUAL ENTERO .)
+    UNMOUNT         reduce using rule 21 (param_mkdisk -> GUION SIZE IGUAL ENTERO .)
+    MKFS            reduce using rule 21 (param_mkdisk -> GUION SIZE IGUAL ENTERO .)
+    PAUSE           reduce using rule 21 (param_mkdisk -> GUION SIZE IGUAL ENTERO .)
+    REP             reduce using rule 21 (param_mkdisk -> GUION SIZE IGUAL ENTERO .)
+    $end            reduce using rule 21 (param_mkdisk -> GUION SIZE IGUAL ENTERO .)
+
+
+state 100
+
+    (22) param_mkdisk -> GUION UNIT IGUAL CADENA_SC .
+
+    GUION           reduce using rule 22 (param_mkdisk -> GUION UNIT IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 22 (param_mkdisk -> GUION UNIT IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 22 (param_mkdisk -> GUION UNIT IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 22 (param_mkdisk -> GUION UNIT IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 22 (param_mkdisk -> GUION UNIT IGUAL CADENA_SC .)
+    FDISK           reduce using rule 22 (param_mkdisk -> GUION UNIT IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 22 (param_mkdisk -> GUION UNIT IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 22 (param_mkdisk -> GUION UNIT IGUAL CADENA_SC .)
+    MKFS            reduce using rule 22 (param_mkdisk -> GUION UNIT IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 22 (param_mkdisk -> GUION UNIT IGUAL CADENA_SC .)
+    REP             reduce using rule 22 (param_mkdisk -> GUION UNIT IGUAL CADENA_SC .)
+    $end            reduce using rule 22 (param_mkdisk -> GUION UNIT IGUAL CADENA_SC .)
+
+
+state 101
+
+    (23) param_mkdisk -> GUION FIT IGUAL CADENA_SC .
+
+    GUION           reduce using rule 23 (param_mkdisk -> GUION FIT IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 23 (param_mkdisk -> GUION FIT IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 23 (param_mkdisk -> GUION FIT IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 23 (param_mkdisk -> GUION FIT IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 23 (param_mkdisk -> GUION FIT IGUAL CADENA_SC .)
+    FDISK           reduce using rule 23 (param_mkdisk -> GUION FIT IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 23 (param_mkdisk -> GUION FIT IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 23 (param_mkdisk -> GUION FIT IGUAL CADENA_SC .)
+    MKFS            reduce using rule 23 (param_mkdisk -> GUION FIT IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 23 (param_mkdisk -> GUION FIT IGUAL CADENA_SC .)
+    REP             reduce using rule 23 (param_mkdisk -> GUION FIT IGUAL CADENA_SC .)
+    $end            reduce using rule 23 (param_mkdisk -> GUION FIT IGUAL CADENA_SC .)
+
+
+state 102
+
+    (24) command_rmdisk -> RMDISK GUION PATH IGUAL CADENA .
+
+    COMMENT         reduce using rule 24 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA .)
+    EXECUTE         reduce using rule 24 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA .)
+    MKDISK          reduce using rule 24 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA .)
+    RMDISK          reduce using rule 24 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA .)
+    FDISK           reduce using rule 24 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA .)
+    MOUNT           reduce using rule 24 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA .)
+    UNMOUNT         reduce using rule 24 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA .)
+    MKFS            reduce using rule 24 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA .)
+    PAUSE           reduce using rule 24 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA .)
+    REP             reduce using rule 24 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA .)
+    $end            reduce using rule 24 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA .)
+
+
+state 103
+
+    (25) command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC .
+
+    COMMENT         reduce using rule 25 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 25 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 25 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 25 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC .)
+    FDISK           reduce using rule 25 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 25 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 25 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC .)
+    MKFS            reduce using rule 25 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 25 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC .)
+    REP             reduce using rule 25 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC .)
+    $end            reduce using rule 25 (command_rmdisk -> RMDISK GUION PATH IGUAL CADENA_SC .)
+
+
+state 104
+
+    (29) param_fdisk -> GUION PATH IGUAL CADENA .
+
+    GUION           reduce using rule 29 (param_fdisk -> GUION PATH IGUAL CADENA .)
+    COMMENT         reduce using rule 29 (param_fdisk -> GUION PATH IGUAL CADENA .)
+    EXECUTE         reduce using rule 29 (param_fdisk -> GUION PATH IGUAL CADENA .)
+    MKDISK          reduce using rule 29 (param_fdisk -> GUION PATH IGUAL CADENA .)
+    RMDISK          reduce using rule 29 (param_fdisk -> GUION PATH IGUAL CADENA .)
+    FDISK           reduce using rule 29 (param_fdisk -> GUION PATH IGUAL CADENA .)
+    MOUNT           reduce using rule 29 (param_fdisk -> GUION PATH IGUAL CADENA .)
+    UNMOUNT         reduce using rule 29 (param_fdisk -> GUION PATH IGUAL CADENA .)
+    MKFS            reduce using rule 29 (param_fdisk -> GUION PATH IGUAL CADENA .)
+    PAUSE           reduce using rule 29 (param_fdisk -> GUION PATH IGUAL CADENA .)
+    REP             reduce using rule 29 (param_fdisk -> GUION PATH IGUAL CADENA .)
+    $end            reduce using rule 29 (param_fdisk -> GUION PATH IGUAL CADENA .)
+
+
+state 105
+
+    (30) param_fdisk -> GUION PATH IGUAL CADENA_SC .
+
+    GUION           reduce using rule 30 (param_fdisk -> GUION PATH IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 30 (param_fdisk -> GUION PATH IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 30 (param_fdisk -> GUION PATH IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 30 (param_fdisk -> GUION PATH IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 30 (param_fdisk -> GUION PATH IGUAL CADENA_SC .)
+    FDISK           reduce using rule 30 (param_fdisk -> GUION PATH IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 30 (param_fdisk -> GUION PATH IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 30 (param_fdisk -> GUION PATH IGUAL CADENA_SC .)
+    MKFS            reduce using rule 30 (param_fdisk -> GUION PATH IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 30 (param_fdisk -> GUION PATH IGUAL CADENA_SC .)
+    REP             reduce using rule 30 (param_fdisk -> GUION PATH IGUAL CADENA_SC .)
+    $end            reduce using rule 30 (param_fdisk -> GUION PATH IGUAL CADENA_SC .)
+
+
+state 106
+
+    (31) param_fdisk -> GUION SIZE IGUAL ENTERO .
+
+    GUION           reduce using rule 31 (param_fdisk -> GUION SIZE IGUAL ENTERO .)
+    COMMENT         reduce using rule 31 (param_fdisk -> GUION SIZE IGUAL ENTERO .)
+    EXECUTE         reduce using rule 31 (param_fdisk -> GUION SIZE IGUAL ENTERO .)
+    MKDISK          reduce using rule 31 (param_fdisk -> GUION SIZE IGUAL ENTERO .)
+    RMDISK          reduce using rule 31 (param_fdisk -> GUION SIZE IGUAL ENTERO .)
+    FDISK           reduce using rule 31 (param_fdisk -> GUION SIZE IGUAL ENTERO .)
+    MOUNT           reduce using rule 31 (param_fdisk -> GUION SIZE IGUAL ENTERO .)
+    UNMOUNT         reduce using rule 31 (param_fdisk -> GUION SIZE IGUAL ENTERO .)
+    MKFS            reduce using rule 31 (param_fdisk -> GUION SIZE IGUAL ENTERO .)
+    PAUSE           reduce using rule 31 (param_fdisk -> GUION SIZE IGUAL ENTERO .)
+    REP             reduce using rule 31 (param_fdisk -> GUION SIZE IGUAL ENTERO .)
+    $end            reduce using rule 31 (param_fdisk -> GUION SIZE IGUAL ENTERO .)
+
+
+state 107
+
+    (32) param_fdisk -> GUION UNIT IGUAL CADENA_SC .
+
+    GUION           reduce using rule 32 (param_fdisk -> GUION UNIT IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 32 (param_fdisk -> GUION UNIT IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 32 (param_fdisk -> GUION UNIT IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 32 (param_fdisk -> GUION UNIT IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 32 (param_fdisk -> GUION UNIT IGUAL CADENA_SC .)
+    FDISK           reduce using rule 32 (param_fdisk -> GUION UNIT IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 32 (param_fdisk -> GUION UNIT IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 32 (param_fdisk -> GUION UNIT IGUAL CADENA_SC .)
+    MKFS            reduce using rule 32 (param_fdisk -> GUION UNIT IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 32 (param_fdisk -> GUION UNIT IGUAL CADENA_SC .)
+    REP             reduce using rule 32 (param_fdisk -> GUION UNIT IGUAL CADENA_SC .)
+    $end            reduce using rule 32 (param_fdisk -> GUION UNIT IGUAL CADENA_SC .)
+
+
+state 108
+
+    (33) param_fdisk -> GUION NAME IGUAL CADENA .
+
+    GUION           reduce using rule 33 (param_fdisk -> GUION NAME IGUAL CADENA .)
+    COMMENT         reduce using rule 33 (param_fdisk -> GUION NAME IGUAL CADENA .)
+    EXECUTE         reduce using rule 33 (param_fdisk -> GUION NAME IGUAL CADENA .)
+    MKDISK          reduce using rule 33 (param_fdisk -> GUION NAME IGUAL CADENA .)
+    RMDISK          reduce using rule 33 (param_fdisk -> GUION NAME IGUAL CADENA .)
+    FDISK           reduce using rule 33 (param_fdisk -> GUION NAME IGUAL CADENA .)
+    MOUNT           reduce using rule 33 (param_fdisk -> GUION NAME IGUAL CADENA .)
+    UNMOUNT         reduce using rule 33 (param_fdisk -> GUION NAME IGUAL CADENA .)
+    MKFS            reduce using rule 33 (param_fdisk -> GUION NAME IGUAL CADENA .)
+    PAUSE           reduce using rule 33 (param_fdisk -> GUION NAME IGUAL CADENA .)
+    REP             reduce using rule 33 (param_fdisk -> GUION NAME IGUAL CADENA .)
+    $end            reduce using rule 33 (param_fdisk -> GUION NAME IGUAL CADENA .)
+
+
+state 109
+
+    (34) param_fdisk -> GUION NAME IGUAL CADENA_SC .
+
+    GUION           reduce using rule 34 (param_fdisk -> GUION NAME IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 34 (param_fdisk -> GUION NAME IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 34 (param_fdisk -> GUION NAME IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 34 (param_fdisk -> GUION NAME IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 34 (param_fdisk -> GUION NAME IGUAL CADENA_SC .)
+    FDISK           reduce using rule 34 (param_fdisk -> GUION NAME IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 34 (param_fdisk -> GUION NAME IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 34 (param_fdisk -> GUION NAME IGUAL CADENA_SC .)
+    MKFS            reduce using rule 34 (param_fdisk -> GUION NAME IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 34 (param_fdisk -> GUION NAME IGUAL CADENA_SC .)
+    REP             reduce using rule 34 (param_fdisk -> GUION NAME IGUAL CADENA_SC .)
+    $end            reduce using rule 34 (param_fdisk -> GUION NAME IGUAL CADENA_SC .)
+
+
+state 110
+
+    (35) param_fdisk -> GUION TYPE IGUAL CADENA_SC .
+
+    GUION           reduce using rule 35 (param_fdisk -> GUION TYPE IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 35 (param_fdisk -> GUION TYPE IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 35 (param_fdisk -> GUION TYPE IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 35 (param_fdisk -> GUION TYPE IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 35 (param_fdisk -> GUION TYPE IGUAL CADENA_SC .)
+    FDISK           reduce using rule 35 (param_fdisk -> GUION TYPE IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 35 (param_fdisk -> GUION TYPE IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 35 (param_fdisk -> GUION TYPE IGUAL CADENA_SC .)
+    MKFS            reduce using rule 35 (param_fdisk -> GUION TYPE IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 35 (param_fdisk -> GUION TYPE IGUAL CADENA_SC .)
+    REP             reduce using rule 35 (param_fdisk -> GUION TYPE IGUAL CADENA_SC .)
+    $end            reduce using rule 35 (param_fdisk -> GUION TYPE IGUAL CADENA_SC .)
+
+
+state 111
+
+    (36) param_fdisk -> GUION FIT IGUAL CADENA_SC .
+
+    GUION           reduce using rule 36 (param_fdisk -> GUION FIT IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 36 (param_fdisk -> GUION FIT IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 36 (param_fdisk -> GUION FIT IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 36 (param_fdisk -> GUION FIT IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 36 (param_fdisk -> GUION FIT IGUAL CADENA_SC .)
+    FDISK           reduce using rule 36 (param_fdisk -> GUION FIT IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 36 (param_fdisk -> GUION FIT IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 36 (param_fdisk -> GUION FIT IGUAL CADENA_SC .)
+    MKFS            reduce using rule 36 (param_fdisk -> GUION FIT IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 36 (param_fdisk -> GUION FIT IGUAL CADENA_SC .)
+    REP             reduce using rule 36 (param_fdisk -> GUION FIT IGUAL CADENA_SC .)
+    $end            reduce using rule 36 (param_fdisk -> GUION FIT IGUAL CADENA_SC .)
+
+
+state 112
+
+    (37) param_fdisk -> GUION DELETE IGUAL CADENA_SC .
+
+    GUION           reduce using rule 37 (param_fdisk -> GUION DELETE IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 37 (param_fdisk -> GUION DELETE IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 37 (param_fdisk -> GUION DELETE IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 37 (param_fdisk -> GUION DELETE IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 37 (param_fdisk -> GUION DELETE IGUAL CADENA_SC .)
+    FDISK           reduce using rule 37 (param_fdisk -> GUION DELETE IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 37 (param_fdisk -> GUION DELETE IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 37 (param_fdisk -> GUION DELETE IGUAL CADENA_SC .)
+    MKFS            reduce using rule 37 (param_fdisk -> GUION DELETE IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 37 (param_fdisk -> GUION DELETE IGUAL CADENA_SC .)
+    REP             reduce using rule 37 (param_fdisk -> GUION DELETE IGUAL CADENA_SC .)
+    $end            reduce using rule 37 (param_fdisk -> GUION DELETE IGUAL CADENA_SC .)
+
+
+state 113
+
+    (38) param_fdisk -> GUION ADD IGUAL ENTERO .
+
+    GUION           reduce using rule 38 (param_fdisk -> GUION ADD IGUAL ENTERO .)
+    COMMENT         reduce using rule 38 (param_fdisk -> GUION ADD IGUAL ENTERO .)
+    EXECUTE         reduce using rule 38 (param_fdisk -> GUION ADD IGUAL ENTERO .)
+    MKDISK          reduce using rule 38 (param_fdisk -> GUION ADD IGUAL ENTERO .)
+    RMDISK          reduce using rule 38 (param_fdisk -> GUION ADD IGUAL ENTERO .)
+    FDISK           reduce using rule 38 (param_fdisk -> GUION ADD IGUAL ENTERO .)
+    MOUNT           reduce using rule 38 (param_fdisk -> GUION ADD IGUAL ENTERO .)
+    UNMOUNT         reduce using rule 38 (param_fdisk -> GUION ADD IGUAL ENTERO .)
+    MKFS            reduce using rule 38 (param_fdisk -> GUION ADD IGUAL ENTERO .)
+    PAUSE           reduce using rule 38 (param_fdisk -> GUION ADD IGUAL ENTERO .)
+    REP             reduce using rule 38 (param_fdisk -> GUION ADD IGUAL ENTERO .)
+    $end            reduce using rule 38 (param_fdisk -> GUION ADD IGUAL ENTERO .)
+
+
+state 114
+
+    (42) param_mount -> GUION PATH IGUAL CADENA .
+
+    GUION           reduce using rule 42 (param_mount -> GUION PATH IGUAL CADENA .)
+    COMMENT         reduce using rule 42 (param_mount -> GUION PATH IGUAL CADENA .)
+    EXECUTE         reduce using rule 42 (param_mount -> GUION PATH IGUAL CADENA .)
+    MKDISK          reduce using rule 42 (param_mount -> GUION PATH IGUAL CADENA .)
+    RMDISK          reduce using rule 42 (param_mount -> GUION PATH IGUAL CADENA .)
+    FDISK           reduce using rule 42 (param_mount -> GUION PATH IGUAL CADENA .)
+    MOUNT           reduce using rule 42 (param_mount -> GUION PATH IGUAL CADENA .)
+    UNMOUNT         reduce using rule 42 (param_mount -> GUION PATH IGUAL CADENA .)
+    MKFS            reduce using rule 42 (param_mount -> GUION PATH IGUAL CADENA .)
+    PAUSE           reduce using rule 42 (param_mount -> GUION PATH IGUAL CADENA .)
+    REP             reduce using rule 42 (param_mount -> GUION PATH IGUAL CADENA .)
+    $end            reduce using rule 42 (param_mount -> GUION PATH IGUAL CADENA .)
+
+
+state 115
+
+    (43) param_mount -> GUION PATH IGUAL CADENA_SC .
+
+    GUION           reduce using rule 43 (param_mount -> GUION PATH IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 43 (param_mount -> GUION PATH IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 43 (param_mount -> GUION PATH IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 43 (param_mount -> GUION PATH IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 43 (param_mount -> GUION PATH IGUAL CADENA_SC .)
+    FDISK           reduce using rule 43 (param_mount -> GUION PATH IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 43 (param_mount -> GUION PATH IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 43 (param_mount -> GUION PATH IGUAL CADENA_SC .)
+    MKFS            reduce using rule 43 (param_mount -> GUION PATH IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 43 (param_mount -> GUION PATH IGUAL CADENA_SC .)
+    REP             reduce using rule 43 (param_mount -> GUION PATH IGUAL CADENA_SC .)
+    $end            reduce using rule 43 (param_mount -> GUION PATH IGUAL CADENA_SC .)
+
+
+state 116
+
+    (44) param_mount -> GUION NAME IGUAL CADENA .
+
+    GUION           reduce using rule 44 (param_mount -> GUION NAME IGUAL CADENA .)
+    COMMENT         reduce using rule 44 (param_mount -> GUION NAME IGUAL CADENA .)
+    EXECUTE         reduce using rule 44 (param_mount -> GUION NAME IGUAL CADENA .)
+    MKDISK          reduce using rule 44 (param_mount -> GUION NAME IGUAL CADENA .)
+    RMDISK          reduce using rule 44 (param_mount -> GUION NAME IGUAL CADENA .)
+    FDISK           reduce using rule 44 (param_mount -> GUION NAME IGUAL CADENA .)
+    MOUNT           reduce using rule 44 (param_mount -> GUION NAME IGUAL CADENA .)
+    UNMOUNT         reduce using rule 44 (param_mount -> GUION NAME IGUAL CADENA .)
+    MKFS            reduce using rule 44 (param_mount -> GUION NAME IGUAL CADENA .)
+    PAUSE           reduce using rule 44 (param_mount -> GUION NAME IGUAL CADENA .)
+    REP             reduce using rule 44 (param_mount -> GUION NAME IGUAL CADENA .)
+    $end            reduce using rule 44 (param_mount -> GUION NAME IGUAL CADENA .)
+
+
+state 117
+
+    (45) param_mount -> GUION NAME IGUAL CADENA_SC .
+
+    GUION           reduce using rule 45 (param_mount -> GUION NAME IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 45 (param_mount -> GUION NAME IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 45 (param_mount -> GUION NAME IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 45 (param_mount -> GUION NAME IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 45 (param_mount -> GUION NAME IGUAL CADENA_SC .)
+    FDISK           reduce using rule 45 (param_mount -> GUION NAME IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 45 (param_mount -> GUION NAME IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 45 (param_mount -> GUION NAME IGUAL CADENA_SC .)
+    MKFS            reduce using rule 45 (param_mount -> GUION NAME IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 45 (param_mount -> GUION NAME IGUAL CADENA_SC .)
+    REP             reduce using rule 45 (param_mount -> GUION NAME IGUAL CADENA_SC .)
+    $end            reduce using rule 45 (param_mount -> GUION NAME IGUAL CADENA_SC .)
+
+
+state 118
+
+    (46) command_unmount -> UNMOUNT GUION ID IGUAL CADENA .
+
+    COMMENT         reduce using rule 46 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA .)
+    EXECUTE         reduce using rule 46 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA .)
+    MKDISK          reduce using rule 46 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA .)
+    RMDISK          reduce using rule 46 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA .)
+    FDISK           reduce using rule 46 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA .)
+    MOUNT           reduce using rule 46 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA .)
+    UNMOUNT         reduce using rule 46 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA .)
+    MKFS            reduce using rule 46 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA .)
+    PAUSE           reduce using rule 46 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA .)
+    REP             reduce using rule 46 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA .)
+    $end            reduce using rule 46 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA .)
+
+
+state 119
+
+    (47) command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC .
+
+    COMMENT         reduce using rule 47 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 47 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 47 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 47 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC .)
+    FDISK           reduce using rule 47 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 47 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 47 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC .)
+    MKFS            reduce using rule 47 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 47 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC .)
+    REP             reduce using rule 47 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC .)
+    $end            reduce using rule 47 (command_unmount -> UNMOUNT GUION ID IGUAL CADENA_SC .)
+
+
+state 120
+
+    (51) param_mkfs -> GUION ID IGUAL CADENA .
+
+    GUION           reduce using rule 51 (param_mkfs -> GUION ID IGUAL CADENA .)
+    COMMENT         reduce using rule 51 (param_mkfs -> GUION ID IGUAL CADENA .)
+    EXECUTE         reduce using rule 51 (param_mkfs -> GUION ID IGUAL CADENA .)
+    MKDISK          reduce using rule 51 (param_mkfs -> GUION ID IGUAL CADENA .)
+    RMDISK          reduce using rule 51 (param_mkfs -> GUION ID IGUAL CADENA .)
+    FDISK           reduce using rule 51 (param_mkfs -> GUION ID IGUAL CADENA .)
+    MOUNT           reduce using rule 51 (param_mkfs -> GUION ID IGUAL CADENA .)
+    UNMOUNT         reduce using rule 51 (param_mkfs -> GUION ID IGUAL CADENA .)
+    MKFS            reduce using rule 51 (param_mkfs -> GUION ID IGUAL CADENA .)
+    PAUSE           reduce using rule 51 (param_mkfs -> GUION ID IGUAL CADENA .)
+    REP             reduce using rule 51 (param_mkfs -> GUION ID IGUAL CADENA .)
+    $end            reduce using rule 51 (param_mkfs -> GUION ID IGUAL CADENA .)
+
+
+state 121
+
+    (52) param_mkfs -> GUION ID IGUAL CADENA_SC .
+
+    GUION           reduce using rule 52 (param_mkfs -> GUION ID IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 52 (param_mkfs -> GUION ID IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 52 (param_mkfs -> GUION ID IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 52 (param_mkfs -> GUION ID IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 52 (param_mkfs -> GUION ID IGUAL CADENA_SC .)
+    FDISK           reduce using rule 52 (param_mkfs -> GUION ID IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 52 (param_mkfs -> GUION ID IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 52 (param_mkfs -> GUION ID IGUAL CADENA_SC .)
+    MKFS            reduce using rule 52 (param_mkfs -> GUION ID IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 52 (param_mkfs -> GUION ID IGUAL CADENA_SC .)
+    REP             reduce using rule 52 (param_mkfs -> GUION ID IGUAL CADENA_SC .)
+    $end            reduce using rule 52 (param_mkfs -> GUION ID IGUAL CADENA_SC .)
+
+
+state 122
+
+    (53) param_mkfs -> GUION TYPE IGUAL CADENA_SC .
+
+    GUION           reduce using rule 53 (param_mkfs -> GUION TYPE IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 53 (param_mkfs -> GUION TYPE IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 53 (param_mkfs -> GUION TYPE IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 53 (param_mkfs -> GUION TYPE IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 53 (param_mkfs -> GUION TYPE IGUAL CADENA_SC .)
+    FDISK           reduce using rule 53 (param_mkfs -> GUION TYPE IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 53 (param_mkfs -> GUION TYPE IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 53 (param_mkfs -> GUION TYPE IGUAL CADENA_SC .)
+    MKFS            reduce using rule 53 (param_mkfs -> GUION TYPE IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 53 (param_mkfs -> GUION TYPE IGUAL CADENA_SC .)
+    REP             reduce using rule 53 (param_mkfs -> GUION TYPE IGUAL CADENA_SC .)
+    $end            reduce using rule 53 (param_mkfs -> GUION TYPE IGUAL CADENA_SC .)
+
+
+state 123
+
+    (54) param_mkfs -> GUION FS IGUAL CADENA_SC .
+
+    GUION           reduce using rule 54 (param_mkfs -> GUION FS IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 54 (param_mkfs -> GUION FS IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 54 (param_mkfs -> GUION FS IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 54 (param_mkfs -> GUION FS IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 54 (param_mkfs -> GUION FS IGUAL CADENA_SC .)
+    FDISK           reduce using rule 54 (param_mkfs -> GUION FS IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 54 (param_mkfs -> GUION FS IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 54 (param_mkfs -> GUION FS IGUAL CADENA_SC .)
+    MKFS            reduce using rule 54 (param_mkfs -> GUION FS IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 54 (param_mkfs -> GUION FS IGUAL CADENA_SC .)
+    REP             reduce using rule 54 (param_mkfs -> GUION FS IGUAL CADENA_SC .)
+    $end            reduce using rule 54 (param_mkfs -> GUION FS IGUAL CADENA_SC .)
+
+
+state 124
+
+    (59) param_rep -> GUION NAME IGUAL CADENA_SC .
+
+    GUION           reduce using rule 59 (param_rep -> GUION NAME IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 59 (param_rep -> GUION NAME IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 59 (param_rep -> GUION NAME IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 59 (param_rep -> GUION NAME IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 59 (param_rep -> GUION NAME IGUAL CADENA_SC .)
+    FDISK           reduce using rule 59 (param_rep -> GUION NAME IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 59 (param_rep -> GUION NAME IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 59 (param_rep -> GUION NAME IGUAL CADENA_SC .)
+    MKFS            reduce using rule 59 (param_rep -> GUION NAME IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 59 (param_rep -> GUION NAME IGUAL CADENA_SC .)
+    REP             reduce using rule 59 (param_rep -> GUION NAME IGUAL CADENA_SC .)
+    $end            reduce using rule 59 (param_rep -> GUION NAME IGUAL CADENA_SC .)
+
+
+state 125
+
+    (60) param_rep -> GUION PATH IGUAL CADENA .
+
+    GUION           reduce using rule 60 (param_rep -> GUION PATH IGUAL CADENA .)
+    COMMENT         reduce using rule 60 (param_rep -> GUION PATH IGUAL CADENA .)
+    EXECUTE         reduce using rule 60 (param_rep -> GUION PATH IGUAL CADENA .)
+    MKDISK          reduce using rule 60 (param_rep -> GUION PATH IGUAL CADENA .)
+    RMDISK          reduce using rule 60 (param_rep -> GUION PATH IGUAL CADENA .)
+    FDISK           reduce using rule 60 (param_rep -> GUION PATH IGUAL CADENA .)
+    MOUNT           reduce using rule 60 (param_rep -> GUION PATH IGUAL CADENA .)
+    UNMOUNT         reduce using rule 60 (param_rep -> GUION PATH IGUAL CADENA .)
+    MKFS            reduce using rule 60 (param_rep -> GUION PATH IGUAL CADENA .)
+    PAUSE           reduce using rule 60 (param_rep -> GUION PATH IGUAL CADENA .)
+    REP             reduce using rule 60 (param_rep -> GUION PATH IGUAL CADENA .)
+    $end            reduce using rule 60 (param_rep -> GUION PATH IGUAL CADENA .)
+
+
+state 126
+
+    (61) param_rep -> GUION PATH IGUAL CADENA_SC .
+
+    GUION           reduce using rule 61 (param_rep -> GUION PATH IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 61 (param_rep -> GUION PATH IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 61 (param_rep -> GUION PATH IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 61 (param_rep -> GUION PATH IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 61 (param_rep -> GUION PATH IGUAL CADENA_SC .)
+    FDISK           reduce using rule 61 (param_rep -> GUION PATH IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 61 (param_rep -> GUION PATH IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 61 (param_rep -> GUION PATH IGUAL CADENA_SC .)
+    MKFS            reduce using rule 61 (param_rep -> GUION PATH IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 61 (param_rep -> GUION PATH IGUAL CADENA_SC .)
+    REP             reduce using rule 61 (param_rep -> GUION PATH IGUAL CADENA_SC .)
+    $end            reduce using rule 61 (param_rep -> GUION PATH IGUAL CADENA_SC .)
+
+
+state 127
+
+    (62) param_rep -> GUION ID IGUAL CADENA .
+
+    GUION           reduce using rule 62 (param_rep -> GUION ID IGUAL CADENA .)
+    COMMENT         reduce using rule 62 (param_rep -> GUION ID IGUAL CADENA .)
+    EXECUTE         reduce using rule 62 (param_rep -> GUION ID IGUAL CADENA .)
+    MKDISK          reduce using rule 62 (param_rep -> GUION ID IGUAL CADENA .)
+    RMDISK          reduce using rule 62 (param_rep -> GUION ID IGUAL CADENA .)
+    FDISK           reduce using rule 62 (param_rep -> GUION ID IGUAL CADENA .)
+    MOUNT           reduce using rule 62 (param_rep -> GUION ID IGUAL CADENA .)
+    UNMOUNT         reduce using rule 62 (param_rep -> GUION ID IGUAL CADENA .)
+    MKFS            reduce using rule 62 (param_rep -> GUION ID IGUAL CADENA .)
+    PAUSE           reduce using rule 62 (param_rep -> GUION ID IGUAL CADENA .)
+    REP             reduce using rule 62 (param_rep -> GUION ID IGUAL CADENA .)
+    $end            reduce using rule 62 (param_rep -> GUION ID IGUAL CADENA .)
+
+
+state 128
+
+    (63) param_rep -> GUION ID IGUAL CADENA_SC .
+
+    GUION           reduce using rule 63 (param_rep -> GUION ID IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 63 (param_rep -> GUION ID IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 63 (param_rep -> GUION ID IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 63 (param_rep -> GUION ID IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 63 (param_rep -> GUION ID IGUAL CADENA_SC .)
+    FDISK           reduce using rule 63 (param_rep -> GUION ID IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 63 (param_rep -> GUION ID IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 63 (param_rep -> GUION ID IGUAL CADENA_SC .)
+    MKFS            reduce using rule 63 (param_rep -> GUION ID IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 63 (param_rep -> GUION ID IGUAL CADENA_SC .)
+    REP             reduce using rule 63 (param_rep -> GUION ID IGUAL CADENA_SC .)
+    $end            reduce using rule 63 (param_rep -> GUION ID IGUAL CADENA_SC .)
+
+
+state 129
+
+    (64) param_rep -> GUION RUTA IGUAL CADENA .
+
+    GUION           reduce using rule 64 (param_rep -> GUION RUTA IGUAL CADENA .)
+    COMMENT         reduce using rule 64 (param_rep -> GUION RUTA IGUAL CADENA .)
+    EXECUTE         reduce using rule 64 (param_rep -> GUION RUTA IGUAL CADENA .)
+    MKDISK          reduce using rule 64 (param_rep -> GUION RUTA IGUAL CADENA .)
+    RMDISK          reduce using rule 64 (param_rep -> GUION RUTA IGUAL CADENA .)
+    FDISK           reduce using rule 64 (param_rep -> GUION RUTA IGUAL CADENA .)
+    MOUNT           reduce using rule 64 (param_rep -> GUION RUTA IGUAL CADENA .)
+    UNMOUNT         reduce using rule 64 (param_rep -> GUION RUTA IGUAL CADENA .)
+    MKFS            reduce using rule 64 (param_rep -> GUION RUTA IGUAL CADENA .)
+    PAUSE           reduce using rule 64 (param_rep -> GUION RUTA IGUAL CADENA .)
+    REP             reduce using rule 64 (param_rep -> GUION RUTA IGUAL CADENA .)
+    $end            reduce using rule 64 (param_rep -> GUION RUTA IGUAL CADENA .)
+
+
+state 130
+
+    (65) param_rep -> GUION RUTA IGUAL CADENA_SC .
+
+    GUION           reduce using rule 65 (param_rep -> GUION RUTA IGUAL CADENA_SC .)
+    COMMENT         reduce using rule 65 (param_rep -> GUION RUTA IGUAL CADENA_SC .)
+    EXECUTE         reduce using rule 65 (param_rep -> GUION RUTA IGUAL CADENA_SC .)
+    MKDISK          reduce using rule 65 (param_rep -> GUION RUTA IGUAL CADENA_SC .)
+    RMDISK          reduce using rule 65 (param_rep -> GUION RUTA IGUAL CADENA_SC .)
+    FDISK           reduce using rule 65 (param_rep -> GUION RUTA IGUAL CADENA_SC .)
+    MOUNT           reduce using rule 65 (param_rep -> GUION RUTA IGUAL CADENA_SC .)
+    UNMOUNT         reduce using rule 65 (param_rep -> GUION RUTA IGUAL CADENA_SC .)
+    MKFS            reduce using rule 65 (param_rep -> GUION RUTA IGUAL CADENA_SC .)
+    PAUSE           reduce using rule 65 (param_rep -> GUION RUTA IGUAL CADENA_SC .)
+    REP             reduce using rule 65 (param_rep -> GUION RUTA IGUAL CADENA_SC .)
+    $end            reduce using rule 65 (param_rep -> GUION RUTA IGUAL CADENA_SC .)
+
